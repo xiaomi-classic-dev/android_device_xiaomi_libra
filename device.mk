@@ -7,6 +7,9 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-mokee
 
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
 $(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
 
 # Haters gonna hate..
