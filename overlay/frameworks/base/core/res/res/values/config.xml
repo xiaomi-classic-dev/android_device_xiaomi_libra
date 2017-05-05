@@ -199,7 +199,6 @@
         <item>255</item>
     </integer-array>
 
-
     <!-- MMS user agent string -->
     <string name="config_mms_user_agent" translatable="false">Android-Mms/2.0</string>
 
