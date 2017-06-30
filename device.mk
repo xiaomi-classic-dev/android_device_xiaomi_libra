@@ -297,5 +297,4 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.target.rc \
     ueventd.qcom.rc \
-    init.class_main.sh \
     init.qcom.post_boot.sh
