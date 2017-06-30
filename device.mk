@@ -290,7 +290,6 @@ PRODUCT_MODEL := Mi Note Pro
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    init.qcom.bt.sh \
     init.qcom.rc \
     init.qcom.sh \
     init.qcom.usb.rc \
