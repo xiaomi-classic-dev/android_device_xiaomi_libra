@@ -401,6 +401,7 @@ service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
 service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
+    shutdown critical
     writepid /dev/cpuset/system-background/tasks
 
 service rfs_access /vendor/bin/rfs_access
