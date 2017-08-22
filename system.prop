@@ -83,6 +83,7 @@ vidc.debug.level=1
 
 # Additional i/p buffer in case of encoder DCVS
 vidc.enc.dcvs.extra-buff-count=2
+persist.media.treble_omx=false
 
 #
 # system props for the data modules
