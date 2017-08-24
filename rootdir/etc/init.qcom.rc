@@ -33,6 +33,8 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    export LD_SHIM_LIBS /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
@@ -46,9 +48,6 @@ on init
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
-
-    #shims
-    export LD_SHIM_LIBS /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB

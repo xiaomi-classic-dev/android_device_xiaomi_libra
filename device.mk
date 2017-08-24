@@ -209,6 +209,7 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl \
+    rild_socket \
     libxml2
 
 # Power
