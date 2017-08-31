@@ -135,6 +135,7 @@ PRODUCT_PACKAGES += \
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
+    libshims_get_process_name \
     android.hardware.gnss@1.0-impl
 
 # IMS
