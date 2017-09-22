@@ -191,8 +191,7 @@ PRODUCT_COPY_FILES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8994 \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-service.leo
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
