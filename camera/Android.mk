@@ -21,11 +21,12 @@ LOCAL_SRC_FILES := \
 
 LOCAL_STATIC_LIBRARIES := libbase libarect
 LOCAL_SHARED_LIBRARIES := \
-    libhardware liblog libutils libsensor libcamera_client \
+    libhardware liblog libutils libcutils libsensor libcamera_client \
     android.hidl.token@1.0-utils \
     android.hardware.graphics.bufferqueue@1.0
 
 LOCAL_C_INCLUDES += \
+    frameworks/native/include/media/openmax \
     system/media/camera/include
 
 LOCAL_HEADER_LIBRARIES += \
