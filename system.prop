@@ -50,10 +50,7 @@ persist.cne.feature=1
 #
 # system props for the dpm module
 #
-persist.dpm.feature=1
-persist.dpm.nsrm.bkg.evt=3955
-
-#system props for the MM modules
+persist.dpm.feature=0
 
 media.stagefright.enable-player=true
 media.stagefright.enable-http=true
