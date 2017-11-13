@@ -102,12 +102,10 @@ on boot
     restorecon /proc/touchscreen/edge_touch_mode
 
     write /dev/cpuset/foreground/cpus 0-2,4-5
-    write /dev/cpuset/foreground/boost/cpus 4-5
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-2
     mkdir /dev/cpuset/top-app/boost
     write /dev/cpuset/top-app/cpus 0-5
-    write /dev/cpuset/top-app/boost/cpus 4-5
 
     chown system system /dev/cpuset/top-app/boost
     chown system system /dev/cpuset/top-app/boost/tasks
