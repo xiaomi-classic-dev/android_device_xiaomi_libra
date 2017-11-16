@@ -151,6 +151,9 @@ TARGET_PER_MGR_ENABLED := true
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 
+# Filesystem
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
+
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
