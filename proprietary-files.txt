@@ -825,7 +825,6 @@ vendor/lib64/libsmemlog.so
 bin/irsc_util
 bin/netmgrd
 bin/qmuxd
-bin/radish
 bin/rfs_access
 bin/rmt_storage
 bin/tftp_server
