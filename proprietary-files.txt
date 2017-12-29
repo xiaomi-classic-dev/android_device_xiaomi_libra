@@ -916,7 +916,6 @@ vendor/lib64/libTimeService.so
 
 # Wi-Fi
 bin/cnss-daemon
-bin/cnss_diag
 
 # Postprocessing
 bin/mm-pp-daemon
