@@ -169,6 +169,10 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes
 
+# IMS
+PRODUCT_PACKAGES += \
+    ims-ext-common
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8994 \
