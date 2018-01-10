@@ -10,3 +10,8 @@
 
 /sys/devices/soc.0/qcom,bcl.*(/.*)?                                 u:object_r:sysfs_thermal:s0
 /sys/devices/qcom,bcl.*(/.*)?                                       u:object_r:sysfs_thermal:s0
+
+# Shell files
+/system/vendor/bin/init\.qcom\.sh					u:object_r:qti_init_shell_exec:s0
+/system/vendor/bin/init\.qcom\.post_boot\.sh		u:object_r:qti_init_shell_exec:s0
+/system/vendor/bin/init\.qcom\.usb\.sh				u:object_r:qti_init_shell_exec:s0

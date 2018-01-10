@@ -436,7 +436,7 @@ service hci_filter_root /vendor/bin/wcnss_filter
     user bluetooth
     group bluetooth oem_2950 system
     disabled
- 
+
 service port-bridge /vendor/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
     class main
     user radio system
@@ -505,14 +505,16 @@ on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
 
-service qcom-sh /system/bin/sh /init.qcom.sh
+service qcom-sh /system/vendor/bin/init.qcom.sh
     class late_start
     user root
+    seclabel u:r:qti_init_shell:s0
     oneshot
 
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
+service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
+    seclabel u:r:qti_init_shell:s0
     disabled
     oneshot
 
