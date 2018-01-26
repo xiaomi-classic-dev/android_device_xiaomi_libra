@@ -157,10 +157,6 @@ PRODUCT_PACKAGES += \
     camera.msm8992 \
     Snap
 
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
-
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8992
