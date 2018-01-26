@@ -201,10 +201,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8994
 
-# Multi HAL configuration file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensor_diag.cfg:system/etc/sensor_diag.cfg \
-    $(LOCAL_PATH)/configs/hals.conf:system/etc/sensors/hals.conf
+    $(LOCAL_PATH)/configs/sensor_diag.cfg:system/etc/sensor_diag.cfg
 
 # USB
 PRODUCT_PACKAGES += \
