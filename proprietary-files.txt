@@ -384,10 +384,6 @@ vendor/lib64/libvendorconn.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
-# Consumer IR
-lib/hw/consumerir.msm8994.so
-lib64/hw/consumerir.msm8994.so
-
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
