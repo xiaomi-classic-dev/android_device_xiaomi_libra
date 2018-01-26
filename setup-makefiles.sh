@@ -17,7 +17,7 @@
 
 set -e
 
-DEVICE=libra
+DEVICE=leo
 VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks

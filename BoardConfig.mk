@@ -1,8 +1,8 @@
 BOARD_VENDOR := xiaomi
 
-DEVICE_PATH := device/xiaomi/libra
+DEVICE_PATH := device/xiaomi/leo
 
-TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/libra/include
+TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/leo/include
 
 #Platform
 TARGET_BOARD_PLATFORM := msm8992
@@ -86,14 +86,14 @@ AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_ROME := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/libra/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/leo/bluetooth
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 WCNSS_FILTER_USES_SIBS := true
 
 #Kernel
-TARGET_KERNEL_SOURCE := kernel/xiaomi/libra
-TARGET_KERNEL_CONFIG := libra_user_defconfig
+TARGET_KERNEL_SOURCE := kernel/xiaomi/leo
+TARGET_KERNEL_CONFIG := leo_user_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5 androidboot.selinux=permissive
 TARGET_KERNEL_APPEND_DTB := true
 BOARD_KERNEL_BASE        := 0x00000000
@@ -167,7 +167,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := \
     hardware/cyanogen/cmhw \
-    device/xiaomi/libra/cmhw
+    device/xiaomi/leo/cmhw
 
 # dt2w
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/wake_gesture"
@@ -205,18 +205,17 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_libra
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_leo
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Assertions
 TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
-TARGET_OTA_ASSERT_DEVICE := 4C,libra
-
+TARGET_OTA_ASSERT_DEVICE := NotePro,leo
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += device/xiaomi/libra/sepolicy
+BOARD_SEPOLICY_DIRS += device/xiaomi/leo/sepolicy
 
 # Inherit from the proprietary version
--include vendor/xiaomi/libra/BoardConfigVendor.mk
+-include vendor/xiaomi/leo/BoardConfigVendor.mk

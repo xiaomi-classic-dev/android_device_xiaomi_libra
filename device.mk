@@ -1,7 +1,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/libra/libra-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/leo/leo-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -188,7 +188,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_libra
+    librecovery_updater_leo
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -241,8 +241,8 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
-PRODUCT_NAME := full_libra
-PRODUCT_DEVICE := libra
+PRODUCT_NAME := full_leo
+PRODUCT_DEVICE := leo
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_MODEL := Mi-4c
 

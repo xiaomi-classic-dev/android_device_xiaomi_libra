@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),libra)
+ifeq ($(TARGET_DEVICE),leo)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
