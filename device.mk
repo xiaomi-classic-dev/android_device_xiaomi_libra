@@ -134,10 +134,6 @@ PRODUCT_PACKAGES += \
     sap.conf \
     xtwifi.conf
 
-# Doze
-PRODUCT_PACKAGES += \
-    LibraDoze
-
 # IMS
 PRODUCT_PACKAGES += \
     libshims_ims
