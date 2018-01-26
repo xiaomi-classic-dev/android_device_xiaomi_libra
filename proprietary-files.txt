@@ -51,7 +51,7 @@ lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libqomx_core.so
-lib/hw/camera.msm8992.so:lib/hw/camera.vendor.msm8992.so
+lib/hw/camera.msm8994.so:lib/hw/camera.vendor.msm8994.so
 vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libFaceProc.so
 vendor/lib/libfastcvadsp_stub.so
@@ -385,8 +385,8 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # Consumer IR
-lib/hw/consumerir.msm8992.so
-lib64/hw/consumerir.msm8992.so
+lib/hw/consumerir.msm8994.so
+lib64/hw/consumerir.msm8994.so
 
 # DPM
 bin/dpmd
@@ -419,8 +419,8 @@ vendor/lib64/librpmb.so
 vendor/lib64/libssd.so
 
 # Gatekeeper
-vendor/lib/hw/gatekeeper.msm8992.so
-vendor/lib64/hw/gatekeeper.msm8992.so
+vendor/lib/hw/gatekeeper.msm8994.so
+vendor/lib64/hw/gatekeeper.msm8994.so
 
 # GPS
 bin/loc_launcher
@@ -533,11 +533,11 @@ etc/firmware/a420_pfp.fw
 etc/firmware/a420_pm4.fw
 
 # Keystore
-vendor/lib/hw/keystore.msm8992.so
-vendor/lib64/hw/keystore.msm8992.so
+vendor/lib/hw/keystore.msm8994.so
+vendor/lib64/hw/keystore.msm8994.so
 
 # Listen
-vendor/lib/hw/sound_trigger.primary.msm8992.so
+vendor/lib/hw/sound_trigger.primary.msm8994.so
 
 # Media
 vendor/lib/libI420colorconvert.so

@@ -5,8 +5,8 @@ $(call inherit-product-if-exists, vendor/xiaomi/leo/leo-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
 
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -93,10 +93,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audiod \
     audio.a2dp.default \
-    audio.primary.msm8992 \
+    audio.primary.msm8994 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_policy.msm8992 \
+    audio_policy.msm8994 \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -122,7 +122,7 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8992 \
+    gps.msm8994 \
     flp.conf \
     gps.conf \
     izat.conf \
@@ -137,10 +137,10 @@ PRODUCT_PACKAGES += \
 
 # Graphics
 PRODUCT_PACKAGES += \
-    copybit.msm8992 \
-    gralloc.msm8992 \
-    hwcomposer.msm8992 \
-    memtrack.msm8992 \
+    copybit.msm8994 \
+    gralloc.msm8994 \
+    hwcomposer.msm8994 \
+    memtrack.msm8994 \
     liboverlay \
     libtinyxml
 
@@ -151,12 +151,12 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8992 \
+    camera.msm8994 \
     Snap
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.msm8992
+    keystore.msm8994
 
 # IRSC
 PRODUCT_COPY_FILES += \
@@ -164,7 +164,7 @@ PRODUCT_COPY_FILES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8992
+    lights.msm8994
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -197,11 +197,11 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8992
+    power.msm8994
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8992
+    sensors.msm8994
 
 # Multi HAL configuration file
 PRODUCT_COPY_FILES += \
