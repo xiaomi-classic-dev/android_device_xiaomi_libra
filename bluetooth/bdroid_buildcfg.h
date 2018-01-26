@@ -24,7 +24,7 @@
 
 #define BLUETOOTH_QTI_SW TRUE
 
-#define BTM_DEF_LOCAL_NAME   "Xiaomi 4c"
+#define BTM_DEF_LOCAL_NAME   "Xiaomi Note Pro"
 #define MAX_ACL_CONNECTIONS 7
 #define MAX_L2CAP_CHANNELS  16
 
