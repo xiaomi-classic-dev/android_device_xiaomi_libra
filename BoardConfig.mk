@@ -161,9 +161,6 @@ BOARD_HARDWARE_CLASS := \
     hardware/cyanogen/cmhw \
     device/xiaomi/leo/cmhw
 
-# dt2w
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/wake_gesture"
-
 # Ril
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 TARGET_RIL_VARIANT := caf
