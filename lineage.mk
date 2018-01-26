@@ -15,5 +15,5 @@ $(call inherit-product, device/xiaomi/leo/device.mk)
 PRODUCT_DEVICE := leo
 PRODUCT_NAME := lineage_leo
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi-4c
+PRODUCT_MODEL := Mi Note Pro
 PRODUCT_MANUFACTURER := Xiaomi
