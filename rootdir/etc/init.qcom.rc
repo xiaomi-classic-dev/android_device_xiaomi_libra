@@ -380,16 +380,6 @@ on post-fs-data
     chown system graphics /sys/class/graphics/fb1/ad
     chmod 0664 /sys/class/graphics/fb1/ad
 
-service ssr_setup /system/bin/ssr_setup
-    oneshot
-    disabled
-
-service ss_ramdump /system/bin/subsystem_ramdump 2
-    class late_start
-#   user system
-    group system
-#    disabled
-
 service perfd /system/vendor/bin/perfd
    class main
    user root
@@ -397,25 +387,8 @@ service perfd /system/vendor/bin/perfd
    socket perfd seqpacket 0666 root system
    writepid /dev/cpuset/system-background/tasks
 
-on property:persist.sys.ssr.restart_level=*
-    start ssr_setup
-
-on property:persist.sys.ssr.enable_ramdumps=1
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
-    mkdir /data/ramdump 770 system system
-#   start ss_ramdump
-
-on property:persist.sys.ssr.enable_ramdumps=0
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
-
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-
-on property:persist.radio.atfwd.start=false
-    stop atfwd
-
-on property:radio.atfwd.start=false
-    stop atfwd
 
 # corefile limit and ETB enabling
 on property:persist.debug.trace=1
@@ -781,12 +754,6 @@ service charger /charger
     group system graphics
     seclabel u:r:healthd:s0
     writepid /dev/cpuset/system-background/tasks
-
-service ssr_diag /system/bin/ssr_diag
-    class late_start
-    user system
-    group system
-    disabled
 
 service hvdcp /system/bin/hvdcp
     class core
