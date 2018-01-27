@@ -380,11 +380,6 @@ on post-fs-data
     chown system graphics /sys/class/graphics/fb1/ad
     chmod 0664 /sys/class/graphics/fb1/ad
 
-service qcomsysd /system/bin/qcom-system-daemon
-    class main
-    user root
-    group root diag
-
 service ssr_setup /system/bin/ssr_setup
     oneshot
     disabled
