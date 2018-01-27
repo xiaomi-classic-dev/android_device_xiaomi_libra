@@ -49,8 +49,9 @@ BOARD_USES_OPENSSL_SYMBOLS := true
 USE_OPENGL_RENDERER := true
 BOARD_USE_LEGACY_UI := true
 
-# Enable keymaster app checking
+# Keymaster
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+TARGET_PROVIDES_KEYMASTER := true
 
 # GPS
 TARGET_NO_RPC := true
