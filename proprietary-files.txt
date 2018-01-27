@@ -734,6 +734,10 @@ vendor/lib64/libimsmedia_jni.so
 vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
 
+# Keystore
+vendor/lib/hw/keystore.msm8994.so
+vendor/lib64/hw/keystore.msm8994.so
+
 # Media
 vendor/lib/libFileMux.so
 vendor/lib/libOmxAacDec.so
@@ -788,6 +792,7 @@ vendor/lib/lib-sec-disp.so
 vendor/lib/libsi.so
 vendor/lib/libssd.so
 vendor/lib/libStDrvInt.so
+vendor/lib/libtzdrmgenprov.so
 vendor/lib64/libavenhancements.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libdrmfs.so
@@ -801,7 +806,6 @@ vendor/lib64/lib-sec-disp.so
 vendor/lib64/libsi.so
 vendor/lib64/libssd.so
 vendor/lib64/libStDrvInt.so
-vendor/lib/libtzdrmgenprov.so
 vendor/lib64/libtzdrmgenprov.so
 
 # Qualcomm framework
