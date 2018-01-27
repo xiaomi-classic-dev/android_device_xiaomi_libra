@@ -818,7 +818,6 @@ vendor/lib64/libsmemlog.so
 vendor/lib64/libxml.so
 
 # Radio
--app/embms/embms.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/datastatusnotification/datastatusnotification.apk
 -app/fastdormancy/fastdormancy.apk
@@ -834,7 +833,6 @@ bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/data/qmi_config.xml
-etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/qti_telephony_common.xml
@@ -843,9 +841,6 @@ etc/permissions/telephonyservice.xml
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
 -framework/qti-telephony-common.jar|88212913c0c44893e05e7003ec2f3e0a432a356d
--framework/embmslibrary.jar
--framework/rcsimssettings.jar
--framework/rcsservice.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
 vendor/lib/libconfigdb.so
@@ -860,8 +855,6 @@ vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/librilqmiservices.so
 vendor/lib/libsettings.so
 vendor/lib/libsystem_health_mon.so
-vendor/lib/libsubsystem_control.so
-vendor/lib/libSubSystemShutdown.so
 vendor/lib64/libconfigdb.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
@@ -874,7 +867,6 @@ vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
-vendor/lib64/libsubsystem_control.so
 vendor/qcril.db
 
 # Sensors
