@@ -14,6 +14,7 @@ persist.sys.ssr.restart_level=ALL_ENABLE
 persist.sys.ssr.enable_ramdumps=1
 persist.radio.multisim.config=dsds
 DEVICE_PROVISIONED=1
+ro.telephony.ril.config=simactivation
 # Start in TD-SCDMA, GSM/WCDMA and LTE mode
 ro.telephony.default_network=20,20
 ro.telephony.default_cdma_sub=0
