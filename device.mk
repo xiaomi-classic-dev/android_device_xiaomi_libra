@@ -165,6 +165,7 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libdashplayer \
     libdivxdrmdecrypt \
+    libdrmclearkeyplugin \
     libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
