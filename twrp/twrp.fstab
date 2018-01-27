@@ -10,4 +10,4 @@
 /misc         emmc   /dev/block/bootdevice/by-name/misc
 /system       ext4   /dev/block/bootdevice/by-name/system
 
-/usb-otg      vfat   /devices/soc.0/f9200000.ssusb/f9200000.dwc3/xhci-hcd.0.auto/usb1            flags=display="USB OTG";storage;removable
+/usb-otg      vfat   /dev/block/sda1 /dev/block/sda            flags=removable;storage

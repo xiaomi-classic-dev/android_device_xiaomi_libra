@@ -206,5 +206,10 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += device/xiaomi/leo/sepolicy
 
+# TWRP Support
+ifeq ($(WITH_TWRP),true)
+-include $(DEVICE_PATH)/twrp/twrp.mk
+endif
+
 # Inherit from the proprietary version
 -include vendor/xiaomi/leo/BoardConfigVendor.mk
