@@ -167,6 +167,7 @@ PRODUCT_PACKAGES += \
     libdivxdrmdecrypt \
     libdrmclearkeyplugin \
     libextmedia_jni \
+    libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
