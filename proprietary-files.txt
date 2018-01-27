@@ -870,8 +870,6 @@ vendor/lib64/libsystem_health_mon.so
 vendor/qcril.db
 
 # Sensors
-bin/sensors.qcom
-etc/sensors/sensor_def_qcomdev.conf
 lib/hw/activity_recognition.msm8994.so
 lib/hw/sensors.leo.so:vendor/lib/libsensors.leo.so
 lib/libinvensense_hal.so
@@ -880,10 +878,8 @@ lib64/hw/sensors.leo.so:vendor/lib64/libsensors.leo.so
 lib64/libinvensense_hal.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/sensors.ssc.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/sensors.ssc.so
 
 # Thermal
 bin/energy-awareness
