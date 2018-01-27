@@ -953,12 +953,6 @@ vendor/lib64/libvendorconn.so
 vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 
-# Miscellaneous
-bin/ssr_diag
-bin/ssr_setup
-bin/subsystem_ramdump
-bin/wdsdaemon
-
 # Media
 vendor/lib/libmm-color-convertor.so
 vendor/lib64/libmm-color-convertor.so
