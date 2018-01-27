@@ -108,12 +108,6 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     services-ext
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    e2fsck \
-    make_ext4fs \
-    setup_fs
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8994 \
