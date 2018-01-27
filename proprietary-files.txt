@@ -1025,21 +1025,5 @@ vendor/lib64/libconnctrl.so
 vendor/lib/libQtiTether.so
 vendor/lib/libconnctrl.so
 
-# Secure
-vendor/lib/libSampleAuthJNI.so
-vendor/lib/libSecureSampleAuthClient.so
-vendor/lib/libSecureSampleAuthJNI.so
-vendor/lib/libSecureUILib.so
-vendor/lib/libsecureui.so
-vendor/lib/libsecureuisvc_jni.so
-vendor/lib/libsecureui_svcsock.so
-vendor/lib64/libSampleAuthJNI.so
-vendor/lib64/libSecureSampleAuthClient.so
-vendor/lib64/libSecureSampleAuthJNI.so
-vendor/lib64/libSecureUILib.so
-vendor/lib64/libsecureui.so
-vendor/lib64/libsecureuisvc_jni.so
-vendor/lib64/libsecureui_svcsock.so
-
 # Widevine
 vendor/lib/mediadrm/libwvdrmengine.so|8d8f13b2b20db3fdeeca94fa03063d0bf5597718
