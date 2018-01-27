@@ -765,40 +765,16 @@ vendor/lib64/libperipheral_client.so
 # Qseecomm
 bin/qseecomd
 vendor/bin/fidodaemon
-vendor/lib/qcdrm/playready/lib/drm/libdrmprplugin_customer.so
-vendor/lib/qcdrm/playready/lib/libprdrmdecrypt_customer.so
-vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
-vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmdecrypt_customer.so
-vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
-vendor/lib/libavenhancements.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
-vendor/lib/libmmrtpdecoder.so
-vendor/lib/libmmrtpencoder.so
-vendor/lib/liboemcrypto.so
-vendor/lib/libpvr.so
-vendor/lib/librmp.so
 vendor/lib/librpmb.so
-vendor/lib/lib-sec-disp.so
-vendor/lib/libsi.so
 vendor/lib/libssd.so
-vendor/lib/libStDrvInt.so
-vendor/lib/libtzdrmgenprov.so
-vendor/lib64/libavenhancements.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
-vendor/lib64/libmmrtpdecoder.so
-vendor/lib64/libmmrtpencoder.so
-vendor/lib64/libpvr.so
-vendor/lib64/librmp.so
 vendor/lib64/librpmb.so
-vendor/lib64/lib-sec-disp.so
-vendor/lib64/libsi.so
 vendor/lib64/libssd.so
-vendor/lib64/libStDrvInt.so
-vendor/lib64/libtzdrmgenprov.so
 
 # Qualcomm framework
 bin/irsc_util
