@@ -763,7 +763,6 @@ vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
 # Qseecomm
-bin/qcom-system-daemon	
 bin/qseecomd
 vendor/bin/fidodaemon
 vendor/lib/qcdrm/playready/lib/drm/libdrmprplugin_customer.so
