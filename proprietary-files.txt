@@ -64,10 +64,6 @@ vendor/lib64/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
-etc/android_model_facea.dat
-etc/android_model_faceg.dat
-etc/people_gender.dat
-etc/watermark_font_2300_3199.dat
 lib/hw/camera.msm8994.so:lib/hw/camera.vendor.msm8994.so
 lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
