@@ -39,14 +39,23 @@ on early-boot
     start select_sns_hal
 
 on fs
-    wait /dev/block/platform/soc.0/f9824900.sdhci/mmcblk0
-    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
-
     mount_all fstab.qcom
     swapon_all fstab.qcom
 
+    wait /dev/block/bootdevice/by-name/cache
+    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev barrier=1
+
+    wait /dev/block/bootdevice/by-name/persist
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
+    restorecon_recursive /persist
     mkdir /persist/data 0700 system system
     mkdir /persist/wlan_bt 0700 system system
+
+    wait /dev/block/bootdevice/by-name/modem
+    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
+
+    wait /dev/block/bootdevice/by-name/bluetooth
+    mount vfat /dev/block/bootdevice/by-name/bluetooth /bt_firmware ro shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
@@ -54,6 +63,9 @@ on post-fs-data
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+    mkdir /data/usf 0700 system system
     mkdir /data/misc/dts 0770 media audio
     mkdir /data/thermal 0771 system system
 
@@ -74,15 +86,16 @@ on boot
     chown system drmrpc /sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a/secure_touch
     write /proc/sys/kernel/sched_boost 1
+    write /proc/sys/vm/dirty_ratio 5
+    write /proc/sys/vm/dirty_background_ratio 1
 
-    write /dev/cpuset/foreground/cpus 0-2,4-5
-    write /dev/cpuset/foreground/boost/cpus 4-5
+    write /dev/cpuset/foreground/cpus 0-2,4-7
+    write /dev/cpuset/foreground/boost/cpus 4-7
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-2
     mkdir /dev/cpuset/top-app/boost
-    write /dev/cpuset/top-app/cpus 0-5
-    write /dev/cpuset/top-app/boost/cpus 4-5
-
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/top-app/boost/cpus 4-7
 
     chown system system /dev/cpuset/top-app/boost
     chown system system /dev/cpuset/top-app/boost/tasks
@@ -160,19 +173,6 @@ service imsdatadaemon /system/bin/imsdatadaemon
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-service select_sns_hal /system/bin/sh /system/bin/sensor_select.sh
-    class main
-    user root
-    group root
-    oneshot
-
-#
-#service wcnss-service /system/bin/wcnss_service
-#    class late_start
-#    user root
-#    group system wifi
-#    oneshot
-#
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
@@ -200,25 +200,6 @@ service ppd /system/bin/mm-pp-daemon
 
 on property:init.svc.surfaceflinger=stopped
     stop ppd
-
-service displayfeature /system/bin/displayfeature
-    class late_start
-    user root
-    group root
-
-on property:init.svc.surfaceflinger=stopped
-    stop displayfeature
-
-on property:init.svc.surfaceflinger=running
-    start displayfeature
-
-on property:init.svc.surfaceflinger=restarting
-    stop displayfeature
-
-service ml_daemon /system/bin/ml_daemon
-    class core
-    user root
-    group root
 
 service seald /system/bin/seald
     class late_start
@@ -254,8 +235,3 @@ service fidodaemon /system/vendor/bin/fidodaemon
 service mtservice /system/bin/mtd
     class late_start
 
-service vsimservice /system/bin/vsimd
-    class late_start
-
-service mlipayservice /system/bin/mlipayd
-    class late_start

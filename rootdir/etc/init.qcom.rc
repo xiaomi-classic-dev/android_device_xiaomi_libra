@@ -59,7 +59,6 @@ on early-boot
     write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
-    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -334,6 +333,52 @@ on post-fs-data
     mkdir /data/misc/SelfHost/Running/ 2750 system shell
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
+
+    chown system system /sys/class/rtc/rtc0/wakealarm
+    chmod 0666 /sys/class/rtc/rtc0/wakealarm
+
+    # Vibrator
+    chown system system /sys/vibrator/pwmvalue
+    chmod 0644 /sys/vibrator/pwmvalue
+    restorecon /sys/vibrator/pwmvalue
+
+    # Key disabler
+    chown root system /sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off
+    chmod 0664 /sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off
+    restorecon /sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off
+
+    # Vibrator
+    chown system system /sys/class/timed_output/vibrator/vtg_default
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/vtg_max
+    chown system system /sys/class/timed_output/vibrator/vtg_min
+
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_default
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_level
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_max
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_min
+
+    restorecon /sys/class/timed_output/vibrator/vtg_default
+    restorecon /sys/class/timed_output/vibrator/vtg_level
+    restorecon /sys/class/timed_output/vibrator/vtg_max
+    restorecon /sys/class/timed_output/vibrator/vtg_min
+
+    #torch
+    chown system system /sys/class/leds/led:torch_0/brightness
+    chmod 0666 /sys/class/leds/led:torch_0/brightness
+
+    #Dynamic FPS
+    chown system graphics /sys/class/graphics/fb0/dynamic_fps
+    chmod 0664 /sys/class/graphics/fb0/dynamic_fps
+    chown system graphics /sys/class/graphics/fb1/dynamic_fps
+    chmod 0664 /sys/class/graphics/fb1/dynamic_fps
+
+    chown system graphics /sys/class/graphics/fb0/ad
+    chmod 0664 /sys/class/graphics/fb0/ad
+    chown system graphics /sys/class/graphics/fb1/ad
+    chmod 0664 /sys/class/graphics/fb1/ad
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
@@ -488,17 +533,6 @@ service config_bt_addr /system/bin/btnvtool -O
     user bluetooth
     group bluetooth radio
     oneshot
-on property:wc_transport.start_root=true
-    start hci_filter_root
-
-on property:wc_transport.start_root=false
-    stop hci_filter_root
-
-service hci_filter_root /system/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth qcom_diag net_bt_stack system
-    disabled
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
@@ -518,24 +552,10 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
-service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh
-     class late_start
-     user bluetooth
-     group system bluetooth net_bt_admin misc
-     disabled
-     oneshot
-
 service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
     user bluetooth
     group bluetooth net_bt_admin inet
-    disabled
-    oneshot
-
-service bt-sap /system/bin/sapd 15
-    user bluetooth
-    group bluetooth net_bt_admin
-    class late_start
     disabled
     oneshot
 
@@ -565,7 +585,6 @@ service qmuxd /system/bin/qmuxd
     user root
     group radio audio bluetooth gps nfc diag
     writepid /dev/cpuset/system-background/tasks
-
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -600,31 +619,6 @@ on property:ro.data.large_tcp_window_size=true
 
 on property:sys.sysctl.tcp_adv_win_scale=*
     write /proc/sys/net/ipv4/tcp_adv_win_scale ${sys.sysctl.tcp_adv_win_scale}
-
-service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet net_admin net_raw
-    disabled
-    oneshot
-
-service amp_init /system/bin/amploader -i
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_load /system/bin/amploader -l 7000
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_unload /system/bin/amploader -u
-    class late_start
-    user root
-    disabled
-    oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
@@ -673,18 +667,6 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
 
 service iprenew_p2p /system/bin/dhcpcd -n
     class late_start
-    disabled
-    oneshot
-
-service ptt_socket_app /system/bin/ptt_socket_app -d
-    class main
-    user root
-    group root
-    oneshot
-
-service ptt_ffbm /system/bin/ptt_socket_app -f -d
-    user root
-    group root
     disabled
     oneshot
 
@@ -741,28 +723,9 @@ service loc_launcher /system/bin/loc_launcher
     group gps inet net_raw diag net_admin wifi
     writepid /dev/cpuset/system-background/tasks
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system
-    disabled
-    oneshot
-
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
-
-service drmdiag /system/bin/drmdiagapp
-    class late_start
-     user root
-     disabled
-     oneshot
-
-on property:drmdiag.load=1
-    start drmdiag
-
-on property:drmdiag.load=0
-    stop drmdiag
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
@@ -775,33 +738,8 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     disabled
     oneshot
 
-service qti-testscripts /system/bin/sh /system/etc/init.qcom.testscripts.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-    seclabel u:r:qti-testscripts:s0
-
-service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
-    class late_start
-    group wifi inet
-    disabled
-    oneshot
-
-service wifi-crda /system/bin/sh /system/etc/init.crda.sh
-   class late_start
-   user root
-   disabled
-   oneshot
-
 on property:sys.boot_completed=1
     start qcom-post-boot
-    start qti-testscripts
-
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
 
 service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     class late_start
@@ -843,36 +781,6 @@ service ril-daemon3 /system/bin/rild -c 3
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log net_raw
 
-service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service usb_uicc_daemon /system/bin/usb_uicc_client
-    class main
-    user system
-    group system log net_raw
-    oneshot
-
-on property:sys.usb_uicc.enabled=1
-    start usb_uicc_enable
-
-on property:sys.usb_uicc.enabled=0
-    start usb_uicc_enable
-
-service profiler_daemon /system/bin/profiler_daemon
-    class late_start
-    user root
-    group root
-    disabled
-
-service hcidump /system/bin/sh /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
-
 service charger /charger
     class charger
     group system graphics
@@ -884,34 +792,6 @@ service ssr_diag /system/bin/ssr_diag
     user system
     group system
     disabled
-
-# Define fastmmi
-service fastmmi /system/bin/mmi
-    user root
-    group root
-    disabled
-
-service fastmmisrv /system/bin/sh /init.qcom.factory.sh
-    user root
-    disabled
-    oneshot
-
-on mmi
-    start fastmmisrv
-
-on ffbm
-    trigger early-fs
-    trigger fs
-    trigger post-fs
-    trigger post-fs-data
-
-    # Load properties from /system/ + /factory after fs mount. Place
-    # this in another action so that the load will be scheduled after the prior
-    # issued fs triggers have completed.
-    trigger load_all_props_action
-
-    trigger early-boot
-    trigger mmi
 
 service hvdcp /system/bin/hvdcp
     class core
@@ -952,21 +832,7 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
     group system qcom_diag sdcard_rw sdcard_r media_rw net_raw readproc
     disabled
     oneshot
-
-service qlogd /system/xbin/qlogd
-    socket qlogd stream 0662 system system
-    class main
-    disabled
-on property:persist.sys.qlogd=1
-    start qlogd
-on property:persist.sys.qlogd=0
-    stop qlogd
-
-service vm_bms /system/bin/vm_bms
-    user root
-    group root
-    disabled
-
+    
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
     class core
@@ -982,31 +848,3 @@ service mmbn-daemon /system/bin/mmbn-daemon
 on property:persist.radio.modem=X7-LTE
    setprop persist.radio.disable_flexmap 0
 
-service wfdservice /system/bin/wfdservice
-    class main
-    user system
-    group graphics audio camera inet net_bt net_bt_admin net_bt_stack drmrpc bluetooth media_rw media
-
-#service RIDL /system/vendor/bin/RIDLClient.exe
-#    class late_start
-#    oneshot
-#    user system
-#    group system inet log sdcard_r sdcard_rw qcom_diag
-    # removed for security team - misc bluetooth radio gps wifi diag media_rw
-    # limited to 12 groups.  Unused: audio usb net_bt_admin net_bt_stac net_raw net_admin
-
-# service for USERDEBUG
-service LKCore-dbg /system/vendor/bin/LKCore
-    class late_start
-    oneshot
-    disabled
-    user root
-    group root system log qcom_diag net_raw
-
-# service for USER
-service LKCore-rel /system/vendor/bin/LKCore
-    class late_start
-    oneshot
-    disabled
-    user system
-    group system log qcom_diag
