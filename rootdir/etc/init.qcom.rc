@@ -779,7 +779,6 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
 
 service mmbn-daemon /system/bin/mmbn-daemon
     class main
-    seclabel u:r:mmbn-daemon:s0
     oneshot
 
 on property:persist.radio.modem=X7-LTE

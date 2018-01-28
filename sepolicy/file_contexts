@@ -1,5 +1,3 @@
-/system/bin/mmbn-daemon           u:object_r:mmbn-daemon_exec:s0
-
 /dev/lirc[0-9]*                                 u:object_r:lirc_device:s0
 /dev/block/bootdevice/by-name/mdm1m9kefs1       u:object_r:efs_boot_dev:s0
 /dev/block/bootdevice/by-name/mdm1m9kefs2       u:object_r:efs_boot_dev:s0
