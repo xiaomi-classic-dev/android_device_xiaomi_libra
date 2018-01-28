@@ -594,7 +594,7 @@ vendor/lib/liblocationservice.so
 vendor/lib/liblocationservice_glue.so
 vendor/lib/liblowi_client.so
 vendor/lib/liblowi_wifihal.so
-vendor/lib/liblowi_wifihal_nl.so
+vendor/lib/liblowi_wifihal_nl.so|ab52e298cc25829278dd851f91d830cbdf71ed62
 vendor/lib/libquipc_os_api.so
 vendor/lib/libslimclient.so
 vendor/lib/libulp2.so
@@ -617,7 +617,7 @@ vendor/lib64/liblocationservice.so
 vendor/lib64/liblocationservice_glue.so
 vendor/lib64/liblowi_client.so
 vendor/lib64/liblowi_wifihal.so
-vendor/lib64/liblowi_wifihal_nl.so
+vendor/lib64/liblowi_wifihal_nl.so|0a7fe96080bbf7307cdb4abcb0d48f48a3318be2
 vendor/lib64/libquipc_os_api.so
 vendor/lib64/libslimclient.so
 vendor/lib64/libulp2.so
