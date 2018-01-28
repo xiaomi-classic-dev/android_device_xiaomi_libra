@@ -163,11 +163,8 @@ BOARD_USES_QCOM_HARDWARE := true
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
-# CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw \
-    device/xiaomi/leo/cmhw
+# Lineage Hardware
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/lineagehw
 
 # Ril
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
