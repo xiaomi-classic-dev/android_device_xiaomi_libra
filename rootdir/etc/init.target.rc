@@ -36,23 +36,14 @@ on early-init
     mkdir /dsp 0771 media media
 
 on fs
+    wait /dev/block/platform/soc.0/f9824900.sdhci/mmcblk0
+    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+
     mount_all fstab.qcom
     swapon_all fstab.qcom
 
-    wait /dev/block/bootdevice/by-name/cache
-    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev barrier=1
-
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
-    restorecon_recursive /persist
     mkdir /persist/data 0700 system system
     mkdir /persist/wlan_bt 0700 system system
-
-    wait /dev/block/bootdevice/by-name/modem
-    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
-
-    wait /dev/block/bootdevice/by-name/bluetooth
-    mount vfat /dev/block/bootdevice/by-name/bluetooth /bt_firmware ro shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
