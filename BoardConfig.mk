@@ -147,6 +147,9 @@ TARGET_HW_DISK_ENCRYPTION := false
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
