@@ -35,9 +35,6 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir /dsp 0771 media media
 
-on early-boot
-    start select_sns_hal
-
 on fs
     mount_all fstab.qcom
     swapon_all fstab.qcom
