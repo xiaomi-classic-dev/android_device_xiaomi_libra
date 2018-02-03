@@ -161,8 +161,8 @@ BOARD_USES_QCOM_HARDWARE := true
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
-# Lineage Hardware
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/lineagehw
+# MK Hardware
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
 
 # Ril
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true

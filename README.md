@@ -1,4 +1,4 @@
-Copyright 2018 - The LineageOS Project
+Copyright 2018 - The Mokee Project
 
 Device configuration for Xiaomi Note Pro.
 =====================================
