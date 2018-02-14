@@ -192,6 +192,12 @@ service energy-awareness /system/bin/energy-awareness
     group system
     oneshot
 
+service readmac /system/bin/readmac
+    class core
+    user system
+    group radio oem_2950 log net_raw wifi
+    oneshot
+
 service fidodaemon /system/vendor/bin/fidodaemon
     class late_start
     user system
