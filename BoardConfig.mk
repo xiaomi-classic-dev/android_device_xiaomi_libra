@@ -65,7 +65,6 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 BOARD_USES_ALSA_AUDIO := true
 TARGET_NO_RPC := true
 BOARD_SUPPORTS_SOUND_TRIGGER := false
-
 AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
 AUDIO_FEATURE_ENABLED_COMPRESS_CAPTURE := true
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
@@ -92,7 +91,7 @@ QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 WCNSS_FILTER_USES_SIBS := true
 
-#Kernel
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/leo
 TARGET_KERNEL_CONFIG := leo_user_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5 androidboot.selinux=permissive
@@ -105,7 +104,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
-# fix this up by examining /proc/mtd on a running device
+# Fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 #64M
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864 #64M
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1744830464 #1920M
@@ -116,9 +115,6 @@ ifneq (,$(filter linux darwin, $(HOST_OS)))
 TARGET_USERIMAGES_USE_F2FS := true
 endif
 BOARD_FLASH_BLOCK_SIZE := 131072 #262144 #(BOARD_KERNEL_PAGESIZE * 64)
-
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
 
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
@@ -131,7 +127,7 @@ BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
 
-#Light HAL
+# Light HAL
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Charger
@@ -140,10 +136,10 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
 
-#Disable HW based full disk encryption
+# Disable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
 
-#Enable peripheral manager
+# Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
 # HIDL
@@ -187,7 +183,7 @@ WIFI_DRIVER_FW_PATH_STA         := "sta"
 TARGET_USES_QCOM_WCNSS_QMI      := true
 WPA_SUPPLICANT_VERSION          := VER_0_8_X
 
-#Recovery
+# Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
