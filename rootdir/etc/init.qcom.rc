@@ -639,17 +639,6 @@ service charger /charger
     seclabel u:r:charger:s0
     writepid /dev/cpuset/system-background/tasks
 
-service hvdcp /system/bin/hvdcp
-    class core
-    user root
-    disabled
-
-on property:persist.usb.hvdcp.detect=true
-    start hvdcp
-
-on property:persist.usb.hvdcp.detect=false
-    stop hvdcp
-
 service qbcharger /charger -m 1
     disabled
     oneshot
