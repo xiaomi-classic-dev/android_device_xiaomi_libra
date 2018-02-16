@@ -190,7 +190,7 @@ service energy-awareness /system/bin/energy-awareness
     group system
     oneshot
 
-service readmac /system/bin/readmac
+service readmac /vendor/bin/readmac
     class core
     user system
     group radio oem_2950 log net_raw wifi
