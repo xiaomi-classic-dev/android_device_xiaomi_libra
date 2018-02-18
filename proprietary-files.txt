@@ -48,18 +48,9 @@ vendor/lib64/libFlacSwDec.so
 vendor/lib64/liblistensoundmodel2.so
 
 # Bluetooth
-bin/btnvtool:vendor/bin/btnvtool
-bin/dun-server:vendor/bin/dun-server
-bin/ftmdaemon:vendor/bin/ftmdaemon
-bin/hci_qcomm_init:vendor/bin/hci_qcomm_init
 bin/port-bridge:vendor/bin/port-bridge
 bin/wcnss_filter:vendor/bin/wcnss_filter
-etc/ftm_test_config
-vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXScheduler.so
 vendor/lib/libbtnv.so
-vendor/lib64/libCommandSvc.so
 vendor/lib64/libbtnv.so
 
 # Camera
