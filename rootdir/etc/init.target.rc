@@ -87,6 +87,9 @@ on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
     swapon_all fstab.qcom
 
+    # Set BFQ I/O scheduler
+    setprop sys.io.scheduler "bfq"
+
 #start camera server as daemon
 service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
