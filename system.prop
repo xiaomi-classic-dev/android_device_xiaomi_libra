@@ -211,12 +211,6 @@ persist.debug.coresight.config=stm-events
 #System property for FM transmitter
 ro.fm.transmitter=false
 
-#Enable property to enable ds2
-audio.dolby.ds2.enabled=true
-
-#enable property for hard bypass
-audio.dolby.ds2.hardbypass=true
-
 # Create zram disk
 #ro.config.zram=true
 
