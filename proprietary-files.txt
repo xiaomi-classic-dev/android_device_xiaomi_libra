@@ -20,7 +20,7 @@ etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
 etc/acdbdata/Forte/Forte_Handset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-vendor/lib/hw/sound_trigger.primary.msm8994.so
+vendor/lib/hw/sound_trigger.primary.msm8994.so|62b3cfa236a11d9723581cdcdf87be13a08012c1
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbmapper.so
