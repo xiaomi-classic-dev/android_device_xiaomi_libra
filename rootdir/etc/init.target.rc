@@ -106,6 +106,7 @@ on boot
     write /dev/cpuset/system-background/cpus 0-2
     mkdir /dev/cpuset/top-app/boost
     write /dev/cpuset/top-app/cpus 0-5
+    write /dev/cpuset/restricted/cpus 0-3
 
     chown system system /dev/cpuset/top-app/boost
     chown system system /dev/cpuset/top-app/boost/tasks
