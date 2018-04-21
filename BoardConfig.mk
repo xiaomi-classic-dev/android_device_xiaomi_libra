@@ -165,6 +165,9 @@ BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 TARGET_RIL_VARIANT := caf
 
+# Remove secdiscard command
+TARGET_REMOVE_SECDISCARD_COMMAND := true
+
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
 
