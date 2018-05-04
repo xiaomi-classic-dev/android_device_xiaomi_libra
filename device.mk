@@ -189,6 +189,10 @@ PRODUCT_PACKAGES += \
     lights.msm8994 \
     android.hardware.light@2.0-impl
 
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.mokee.livedisplay@1.0-service-legacymm
+
 # OMX
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
