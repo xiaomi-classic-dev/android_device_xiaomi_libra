@@ -640,7 +640,7 @@ vendor/lib/librs_adreno_sha1.so|be8a817743950dac6e22b50cbd9657c2d35c35f2
 vendor/lib/libRSDriver_adreno.so|ee3386248adfa7d1a8c1107e051bcbbd3e8df0c1
 vendor/lib/libscale.so|9c1044395f1a93b10d3f85ce3123a73676b1bac5
 vendor/lib64/egl/eglSubDriverAndroid.so|03e2c66eebed80a91b08e2c18d011844682bdd7b
-vendor/lib64/egl/libEGL_adreno.so3193346e9938e05ce611db0d0f9e456009289ebd
+vendor/lib64/egl/libEGL_adreno.so|3193346e9938e05ce611db0d0f9e456009289ebd
 vendor/lib64/egl/libGLESv1_CM_adreno.so|e429adb54d16ea1e359bc0a56b0a3a7336989a77
 vendor/lib64/egl/libGLESv2_adreno.so|f072b33a708cc81de6e6a2d09741696f8c9ce034
 vendor/lib64/egl/libq3dtools_adreno.so|c5fcb698418bf5aedb15e6cf87a6d649b7f09aba
@@ -884,12 +884,10 @@ vendor/etc/perf-profile4.conf
 vendor/etc/perf-profile5.conf
 vendor/lib/libqti-at.so
 vendor/lib/libqti-gt.so
-vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib/libthermalclient.so
 vendor/lib64/libqti-at.so
 vendor/lib64/libqti-gt.so
-vendor/lib64/libqti-iop-client.so
 vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
