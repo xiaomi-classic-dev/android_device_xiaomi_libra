@@ -356,6 +356,7 @@ service perfd /system/vendor/bin/perfd
    writepid /dev/cpuset/system-background/tasks
 
 on property:sys.boot_completed=1
+    restart cameraserver
     write /dev/kmsg "Boot completed "
 
 # corefile limit and ETB enabling
