@@ -89,6 +89,9 @@ QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 WCNSS_FILTER_USES_SIBS := true
 
+# EXFAT
+TARGET_EXFAT_DRIVER := exfat
+
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/leo
 TARGET_KERNEL_CONFIG := leo_user_defconfig
