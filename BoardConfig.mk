@@ -211,7 +211,7 @@ include device/qcom/sepolicy/legacy-sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/xiaomi/leo/sepolicy
 
 # Shims
-TARGET_LD_SHIM_LIBS := /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib/libmmcamera2_stats_algorithm.so|libshim_atomic.so:/system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so
+TARGET_LD_SHIM_LIBS := /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib/libmmcamera2_stats_algorithm.so|libshim_atomic.so:/system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib/hw/camera.vendor.msm8994.so|libshim_camera.so
 
 # TWRP Support
 ifeq ($(WITH_TWRP),true)
