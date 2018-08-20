@@ -258,3 +258,6 @@ ro.btconfig.vendor=qcom
 ro.btconfig.chip=QCA6164
 persist.power.useautobrightadj=true
 persist.radio.apm_sim_not_pwdn=1
+
+# Vendor security patch level
+ro.lineage.build.vendor_security_patch=2017-10-01
