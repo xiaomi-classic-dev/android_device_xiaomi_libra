@@ -10,8 +10,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 
-$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
-
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
