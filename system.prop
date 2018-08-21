@@ -44,11 +44,11 @@ persist.demo.hdmirotationlock=false
 
 ro.sf.lcd_density=560
 ro.hdmi.enable=true
-persist.speaker.prot.enable=true
+persist.vendor.audio.speaker.prot.enable=true
 #enable dirac effect for speaker
 persist.audio.dirac.speaker=true
 #0 is default(30 min)
-persist.spkr.cal.duration=0
+persist.vendor.audio.spkr.cal.duration=0
 qcom.hw.aac.encoder=true
 
 #
@@ -162,13 +162,13 @@ ro.bluetooth.emb_wp_mode=true
 #
 #snapdragon value add features
 #
-ro.qc.sdk.audio.ssr=false
+ro.vendor.audio.sdk.ssr=false
 persist.audio.ssr.3mic=false
 ##fluencetype can be "fluence" or "fluencepro" or "none"
-ro.qc.sdk.audio.fluencetype=fluence
-persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=true
+ro.vendor.audio.sdk.fluencetype=fluence
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.voicerec=false
+persist.vendor.audio.fluence.speaker=true
 
 ro.qc.sdk.sensors.gestures=true
 ro.qc.sdk.gestures.camera=false
@@ -177,12 +177,12 @@ ro.qc.sdk.camera.facialproc=false
 persist.debug.wfd.enable=1
 #property to choose between virtual/external wfd display
 persist.sys.wfd.virtual=0
-tunnel.audio.encode = false
+vendor.audio.tunnel.encode=false
 #enable gapless by default
-audio.offload.gapless.enabled=true
+vendor.audio.offload.gapless.enabled=true
 
 #Buffer size in kbytes for compress offload playback
-audio.offload.buffer.size.kb=32
+vendor.audio.offload.buffer.size.kb=32
 
 #Enable offload audio video playback by default
 audio.offload.video=true
@@ -194,7 +194,7 @@ audio.offload.disable=0
 audio.offload.pcm.16bit.enable=true
 
 audio.offload.passthrough=false
-audio.offload.multiple.enabled=false
+vendor.audio.offload.multiple.enabled=false
 
 #Enable 24 bit PCM offload by default
 audio.offload.pcm.24bit.enable=true
@@ -212,7 +212,7 @@ audio.deep_buffer.media=true
 persist.hwc.enable_vds=1
 
 #enable voice path for PCM VoIP by default
-use.voice.path.for.pcm.voip=true
+vendor.voice.path.for.pcm.voip=true
 
 #selects CoreSight configuration to enable
 persist.debug.coresight.config=stm-events
@@ -260,7 +260,7 @@ persist.radio.custom_ecc=1
 persist.radio.sib16_support=1
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 af.fast_track_multiplier=1
-audio_hal.period_size=192
+vendor.audio_hal.period_size=192
 ro.btconfig.if=uart
 ro.btconfig.dev=/dev/ttyHS0
 ro.btconfig.vendor=qcom
