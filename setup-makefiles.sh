@@ -17,10 +17,13 @@
 
 set -e
 
+# Required!
 DEVICE=leo
 VENDOR=xiaomi
 
-# Load extract_utils and do some sanity checks
+INITIAL_COPYRIGHT_YEAR=2017
+
+# Load extractutils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
@@ -39,16 +42,8 @@ setup_vendor "$DEVICE" "$VENDOR" "$MK_ROOT"
 # Copyright headers and guards
 write_headers
 
+# The standard blobs
 write_makefiles "$MY_DIR"/proprietary-files.txt
 
-cat << EOF >> "$ANDROIDMK"
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib64/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib64 > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
-
-EOF
-
-# Append the calls to firmware images
-append_firmware_calls_to_makefiles
-
-# Finish
+# We are done!
 write_footers
