@@ -40,6 +40,9 @@
 #define RAMP_STEP_MS    "ramp_step_ms"
 #define RGB_BLINK       "rgb_blink"
 
+#define MAX_LED_BRIGHTNESS    255
+#define MAX_LCD_BRIGHTNESS    3200
+
 /*
  * 8 duty percent steps.
  */
@@ -72,13 +75,44 @@ static void set(std::string path, int value) {
     set(path, std::to_string(value));
 }
 
+static uint32_t getBrightness(const LightState& state) {
+    uint32_t alpha, red, green, blue;
+
+    /*
+     * Extract brightness from AARRGGBB.
+     */
+    alpha = (state.color >> 24) & 0xFF;
+    red = (state.color >> 16) & 0xFF;
+    green = (state.color >> 8) & 0xFF;
+    blue = state.color & 0xFF;
+
+    /*
+     * Scale RGB brightness if Alpha brightness is not 0xFF.
+     */
+    if (alpha != 0xFF) {
+        red = red * alpha / 0xFF;
+        green = green * alpha / 0xFF;
+        blue = blue * alpha / 0xFF;
+    }
+
+    return (77 * red + 150 * green + 29 * blue) >> 8;
+}
+
+static inline uint32_t scaleBrightness(uint32_t brightness, uint32_t maxBrightness) {
+    return brightness * maxBrightness / 0xFF;
+}
+
+static inline uint32_t getScaledBrightness(const LightState& state, uint32_t maxBrightness) {
+    return scaleBrightness(getBrightness(state), maxBrightness);
+}
+
 static void handleBacklight(const LightState& state) {
-    uint32_t brightness = state.color & 0xFF;
+    uint32_t brightness = getScaledBrightness(state, MAX_LCD_BRIGHTNESS);
     set(LCD_LED BRIGHTNESS, brightness);
 }
 
 static void handleButtons(const LightState& state) {
-    uint32_t brightness = state.color & 0xFF;
+    uint32_t brightness = getScaledBrightness(state, MAX_LED_BRIGHTNESS);
     set(BUTTON_LED BRIGHTNESS, brightness);
     set(BUTTON1_LED BRIGHTNESS, brightness);
 }
