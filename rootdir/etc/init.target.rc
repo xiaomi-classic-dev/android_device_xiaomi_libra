@@ -192,10 +192,9 @@ service energy-awareness /vendor/bin/energy-awareness
     oneshot
 
 service readmac /vendor/bin/readmac
-    class core
-    user system
-    group radio oem_2950 log net_raw wifi
-    seclabel u:r:readmac:s0
+    class main
+    user root
+    group root oem_2950
     oneshot
 
 service fidodaemon /system/vendor/bin/fidodaemon
