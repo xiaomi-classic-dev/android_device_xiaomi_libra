@@ -156,7 +156,7 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Power
-TARGET_HAS_NO_WIFI_STATS := true
+TARGET_HAS_NO_WLAN_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 
 # Qualcomm support
