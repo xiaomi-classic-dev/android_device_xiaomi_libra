@@ -130,6 +130,7 @@ telephony.lteOnCdmaDevice=1
 # System props for bluetooth
 # System prop to turn on hfp client
 bluetooth.hfp.client=1
+ro.bt.bdaddr_path=/data/misc/bluetooth/bdaddr
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.hfp=true
 ro.qualcomm.bluetooth.hsp=true

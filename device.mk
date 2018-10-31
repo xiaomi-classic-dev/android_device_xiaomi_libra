@@ -111,8 +111,9 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     tinymix
 
-# Bluetooth HAL
+# Bluetooth
 PRODUCT_PACKAGES += \
+    bdaddr_xiaomi \
     libbt-vendor \
     android.hardware.bluetooth@1.0-impl
 
