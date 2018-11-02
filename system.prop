@@ -229,20 +229,8 @@ ro.fm.transmitter=false
 # Enable manual network selection function and distinguish 2G/3G/4G
 persist.radio.rat_on=combine
 
-# Only for CMCC workarroud for an OOM issue
-persist.ims.disableUserAgent=1
-
-#Enable for IMS feature
-persist.radio.VT_HYBRID_ENABLE=1
-sys.ims.QMI_DAEMON_STATUS=1
 #For specail cdma card sms issue
 persist.radio.force_on_dc=true
-
-
-#Enable for IMS feature
-persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=1
-persist.radio.VT_HYBRID_ENABLE=1
 
 #Enable short oos enhancement
 ro.sys.oosenhance.enable=true
