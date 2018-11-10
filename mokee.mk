@@ -1,5 +1,5 @@
 # Release name
-PRODUCT_RELEASE_NAME := leo
+PRODUCT_RELEASE_NAME := libra
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
@@ -9,11 +9,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/xiaomi/leo/device.mk)
+$(call inherit-product, device/xiaomi/libra/device.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := leo
-PRODUCT_NAME := mk_leo
+PRODUCT_DEVICE := libra
+PRODUCT_NAME := mk_libra
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi Note Pro
+PRODUCT_MODEL := Mi-4c
 PRODUCT_MANUFACTURER := Xiaomi

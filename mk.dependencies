@@ -4,7 +4,7 @@
     "target_path": "kernel/xiaomi/leo"
   },
   {
-    "repository": "android_vendor_xiaomi_leo",
-    "target_path": "vendor/xiaomi/leo"
+    "repository": "android_vendor_xiaomi_libra",
+    "target_path": "vendor/xiaomi/libra"
   }
 ]

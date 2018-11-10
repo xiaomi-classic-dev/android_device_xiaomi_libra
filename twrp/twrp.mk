@@ -11,4 +11,4 @@ TW_EXTERNAL_STORAGE_PATH := "/usb-otg"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "usb-otg"
 TW_EXTRA_LANGUAGES := true
 
-PRODUCT_COPY_FILES += device/xiaomi/leo/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
+PRODUCT_COPY_FILES += device/xiaomi/libra/twrp/twrp.fstab:recovery/root/etc/twrp.fstab

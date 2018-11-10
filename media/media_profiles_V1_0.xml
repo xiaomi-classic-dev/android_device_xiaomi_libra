@@ -186,7 +186,7 @@
     <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="30">
         <Video codec="h264"
          bitRate="2000000"
-         width="640"
+         width="720"
                height="480"
                frameRate="30" />
         <!-- audio setting is ignored -->
