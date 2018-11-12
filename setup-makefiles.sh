@@ -18,7 +18,7 @@
 set -e
 
 # Required!
-DEVICE=leo
+DEVICE=libra
 VENDOR=xiaomi
 
 INITIAL_COPYRIGHT_YEAR=2017

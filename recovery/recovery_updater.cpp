@@ -182,6 +182,6 @@ Value * VerifyTrustZoneFn(const char *name, State *state, const std::vector<std:
     return StringValue(strdup(ret ? "1" : "0"));
 }
 
-void Register_librecovery_updater_leo() {
-    RegisterFunction("leo.verify_trustzone", VerifyTrustZoneFn);
+void Register_librecovery_updater_libra() {
+    RegisterFunction("libra.verify_trustzone", VerifyTrustZoneFn);
 }
