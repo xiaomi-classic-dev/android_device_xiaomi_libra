@@ -192,6 +192,9 @@ on boot
     #doubletap to wake
     chown system system /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/wake_gesture
 
+    #edge gesture
+    chown system system /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/edge_mode
+
     #keydisabler
     chown system system /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/0dbutton
 
