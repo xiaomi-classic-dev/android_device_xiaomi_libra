@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),leo)
+ifeq ($(TARGET_DEVICE),libra)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 

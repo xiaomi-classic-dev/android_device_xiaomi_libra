@@ -1,15 +1,15 @@
 BOARD_VENDOR := xiaomi
 
-DEVICE_PATH := device/xiaomi/leo
+DEVICE_PATH := device/xiaomi/libra
 
-TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/leo/include
+TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/libra/include
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8994
-TARGET_BOOTLOADER_BOARD_NAME := msm8994
+TARGET_BOARD_PLATFORM := msm8992
+TARGET_BOOTLOADER_BOARD_NAME := msm8992
 TARGET_NO_BOOTLOADER := true
 BOOTLOADER_PLATFORM := msm8994 # use msm8994 LK configuration
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno430
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno418
 TARGET_BOARD_SUFFIX := _64
 
 # Arch
@@ -17,12 +17,13 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_VARIANT := generic
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53.a57
+TARGET_CPU_CORTEX_A53 := true
 
 TARGET_USES_64_BIT_BINDER := true
 TARGET_CPU_SMP := true
@@ -85,7 +86,7 @@ AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_ROME := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/leo/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/libra/bluetooth
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
 WCNSS_FILTER_USES_SIBS := true
@@ -95,7 +96,7 @@ TARGET_EXFAT_DRIVER := exfat
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/leo
-TARGET_KERNEL_CONFIG := leo_user_defconfig
+TARGET_KERNEL_CONFIG := libra_user_defconfig
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5 androidboot.selinux=permissive
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -109,9 +110,9 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 # Fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864 #64M
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864 #64M
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1744830464 #1920M
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2013265920 #1920M
 BOARD_CACHEIMAGE_PARTITION_SIZE := 402653184 #384M
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 59852700672 #58G
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 27980184576 #26G
 TARGET_USERIMAGES_USE_EXT4 := true
 ifneq (,$(filter linux darwin, $(HOST_OS)))
 TARGET_USERIMAGES_USE_F2FS := true
@@ -167,6 +168,9 @@ BOARD_USES_QC_TIME_SERVICES := true
 # Lineage Hardware
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
 
+# dt2w
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/wake_gesture"
+
 # Ril
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 TARGET_RIL_VARIANT := caf
@@ -200,23 +204,23 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_leo
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_libra
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Assertions
 TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
-TARGET_OTA_ASSERT_DEVICE := NotePro,leo
+TARGET_OTA_ASSERT_DEVICE := 4C,libra
 
 # SELinux
 include device/qcom/sepolicy-legacy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += device/xiaomi/leo/sepolicy
+BOARD_SEPOLICY_DIRS += device/xiaomi/libra/sepolicy
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2017-10-01
+VENDOR_SECURITY_PATCH := 2018-03-01
 
 # Shims
-TARGET_LD_SHIM_LIBS := /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib/libmmcamera2_stats_algorithm.so|libshim_atomic.so:/system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib/hw/camera.vendor.msm8994.so|libshim_camera.so
+TARGET_LD_SHIM_LIBS := /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib/libmmcamera2_stats_algorithm.so|libshim_atomic.so:/system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib/hw/camera.vendor.msm8992.so|libshim_camera.so
 
 # TWRP Support
 ifeq ($(WITH_TWRP),true)
@@ -224,4 +228,4 @@ ifeq ($(WITH_TWRP),true)
 endif
 
 # Inherit from the proprietary version
--include vendor/xiaomi/leo/BoardConfigVendor.mk
+-include vendor/xiaomi/libra/BoardConfigVendor.mk

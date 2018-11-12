@@ -1,7 +1,7 @@
 # Dalvik heap
-dalvik.vm.heapstartsize=8m
-dalvik.vm.heapgrowthlimit=288m
-dalvik.vm.heapsize=768m
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=192m
+dalvik.vm.heapsize=512m
 dalvik.vm.heaptargetutilization=0.75
 dalvik.vm.heapminfree=2m
 dalvik.vm.heapmaxfree=8m
@@ -23,7 +23,6 @@ persist.sys.ssr.enable_ramdumps=1
 persist.radio.add_power_save=1
 persist.radio.multisim.config=dsds
 DEVICE_PROVISIONED=1
-ro.telephony.ril.config=simactivation
 # Start in TD-SCDMA, GSM/WCDMA and LTE mode
 ro.telephony.default_network=20,20
 ro.telephony.default_cdma_sub=0
@@ -33,7 +32,6 @@ debug.egl.hw=1
 debug.composition.type=c2d
 persist.hwc.mdpcomp.enable=true
 persist.mdpcomp.4k2kSplit=1
-persist.hwc.mdpcomp.maxpermixer=5
 persist.mdpcomp_perfhint=50
 debug.mdpcomp.logs=0
 persist.metadata_dynfps.disable=true
@@ -41,7 +39,7 @@ persist.hwc.ptor.enable=true
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 
-ro.sf.lcd_density=560
+ro.sf.lcd_density=480
 ro.hdmi.enable=true
 persist.vendor.audio.speaker.prot.enable=true
 #enable dirac effect for speaker
@@ -118,7 +116,7 @@ ro.qcom.ad.sensortype=2
 
 # Display feature support
 # bit0-ColorPrefer bit1-EyeCare bit2-AD bit3-CE bit4-CABC bit5-SRGB
-ro.sys.display.support=55
+ro.sys.display.support=23
 
 #
 # System props for telephony
@@ -189,23 +187,18 @@ vendor.audio.offload.buffer.size.kb=32
 #Enable offload audio video playback by default
 audio.offload.video=true
 
-#Disable offload except for PCM
-audio.offload.disable=0
+#Enable 16 bit PCM offload by default
+audio.offload.pcm.16bit.enable=false
 
-#Disable 16 bit PCM offload by default
-audio.offload.pcm.16bit.enable=true
-
-audio.offload.passthrough=false
+#Enable multi offload by default
 vendor.audio.offload.multiple.enabled=false
 
 #Enable 24 bit PCM offload by default
-audio.offload.pcm.24bit.enable=true
+audio.offload.pcm.24bit.enable=false
+audio.offload.disable=1
 
 #Enable audio track offload by default
 audio.offload.track.enable=false
-
-# default minimum length allowed for offload
-audio.offload.min.duration.secs=15
 
 #Enable music through deep buffer
 audio.deep_buffer.media=true
@@ -219,12 +212,8 @@ vendor.voice.path.for.pcm.voip=true
 #selects CoreSight configuration to enable
 persist.debug.coresight.config=stm-events
 
-#System property for FM transmitter
-ro.fm.transmitter=false
-
 # Create zram disk
 #ro.config.zram=true
-
 
 # Enable manual network selection function and distinguish 2G/3G/4G
 persist.radio.rat_on=combine
@@ -232,12 +221,8 @@ persist.radio.rat_on=combine
 # Only for CMCC workarroud for an OOM issue
 persist.ims.disableUserAgent=1
 
-#Enable for IMS feature
-persist.radio.VT_HYBRID_ENABLE=1
-sys.ims.QMI_DAEMON_STATUS=1
 #For specail cdma card sms issue
 persist.radio.force_on_dc=true
-
 
 #Enable for IMS feature
 persist.dbg.volte_avail_ovr=1
@@ -251,6 +236,10 @@ ro.sys.oosenhance.timer=20000
 # button jack mode & switch
 persist.sys.button_jack_profile=volume
 persist.sys.button_jack_switch=0
+
+#property to set fingerpirnt vendor
+ro.hardware.fingerprint=fpc
+sys.fpc.tu.disabled=0
 
 persist.sys.mcd_config_file=/system/etc/mcd_default.conf
 persist.sys.klo=on
@@ -269,3 +258,6 @@ ro.btconfig.vendor=qcom
 ro.btconfig.chip=QCA6164
 persist.power.useautobrightadj=true
 persist.radio.apm_sim_not_pwdn=1
+
+# Maintainer
+ro.mk.maintainer=guaiyihu

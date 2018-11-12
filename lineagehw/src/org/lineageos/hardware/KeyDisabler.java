@@ -29,7 +29,7 @@ import org.lineageos.internal.util.FileUtils;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/sys/bus/i2c/drivers/cyttsp_streetfighter/2-0028/keys_off";
+    private static String CONTROL_PATH = "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/0dbutton";
 
     public static boolean isSupported() {
         return FileUtils.isFileReadable(CONTROL_PATH) &&
@@ -41,7 +41,7 @@ public class KeyDisabler {
     }
 
     public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "1" : "0"));
+        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
     }
 
 }

@@ -1,7 +1,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/leo/leo-vendor.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/libra/libra-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
@@ -37,10 +37,13 @@ PRODUCT_COPY_FILES += \
 
 # keylayout
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/cyttsp_button.kl:system/vendor/usr/keylayout/cyttsp_button.kl \
-    $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/vendor/usr/keylayout/synaptics_dsx.kl \
+    $(LOCAL_PATH)/keylayout/ft5x46.kl:system/vendor/usr/keylayout/ft5x46.kl \
+    $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/vendor/usr/keylayout/atmel-maxtouch.kl \
+    $(LOCAL_PATH)/keylayout/atmel-maxtouch-edge.kl:system/vendor/usr/keylayout/atmel-maxtouch-edge.kl \
+    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/vendor/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/keylayout/msm8994-tomtom-snd-card_Button_Jack.kl:system/vendor/usr/keylayout/msm8994-tomtom-snd-card_Button_Jack.kl \
-    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/vendor/usr/keylayout/gpio-keys.kl
+    $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/vendor/usr/keylayout/synaptics_dsx.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_dsx_edge.kl:system/vendor/usr/keylayout/synaptics_dsx_edge.kl
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/vendor/etc/media_codecs_google_audio.xml \
@@ -53,6 +56,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/vendor/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.full.xml:system/vendor/etc/permissions/android.hardware.camera.full.xml\
     frameworks/native/data/etc/android.hardware.camera.raw.xml:system/vendor/etc/permissions/android.hardware.camera.raw.xml\
+    frameworks/native/data/etc/android.hardware.consumerir.xml:system/vendor/etc/permissions/android.hardware.consumerir.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/vendor/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/vendor/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/vendor/etc/permissions/android.hardware.location.gps.xml \
@@ -102,7 +106,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.soundtrigger@2.0-impl \
     audio.a2dp.default \
-    audio.primary.msm8994 \
+    audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
@@ -126,7 +130,7 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8994 \
+    gps.msm8992 \
     flp.conf \
     gps.conf \
     izat.conf \
@@ -150,10 +154,10 @@ PRODUCT_PACKAGES += \
 
 # Graphics
 PRODUCT_PACKAGES += \
-    copybit.msm8994 \
-    gralloc.msm8994 \
-    hwcomposer.msm8994 \
-    memtrack.msm8994 \
+    copybit.msm8992 \
+    gralloc.msm8992 \
+    hwcomposer.msm8992 \
+    memtrack.msm8992 \
     liboverlay \
     libtinyxml \
     libgenlock \
@@ -174,7 +178,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8994 \
+    camera.msm8992 \
     camera.device@1.0-impl \
     android.hardware.camera.provider@2.4-impl \
     libshim_atomic \
@@ -185,13 +189,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# IR
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl
+
 # IRSC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/vendor/etc/sec_config
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.leo
+    android.hardware.light@2.0-service.libra
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
@@ -218,7 +226,7 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    librecovery_updater_leo
+    librecovery_updater_libra
     
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -241,7 +249,7 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8994 \
+    sensors.msm8992 \
     android.hardware.sensors@1.0-impl
 
 PRODUCT_COPY_FILES += \
@@ -290,16 +298,16 @@ PRODUCT_COPY_FILES += \
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1440
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
 
-PRODUCT_NAME := full_leo
-PRODUCT_DEVICE := leo
+PRODUCT_NAME := full_libra
+PRODUCT_DEVICE := libra
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_MODEL := Mi Note Pro
+PRODUCT_MODEL := Mi-4c
 
 # Ramdisk
 PRODUCT_PACKAGES += \
