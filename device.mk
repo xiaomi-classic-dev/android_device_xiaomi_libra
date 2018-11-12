@@ -128,6 +128,10 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     services-ext
 
+# EdgeGesture
+PRODUCT_PACKAGES += \
+    EdgeGesture
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8992 \

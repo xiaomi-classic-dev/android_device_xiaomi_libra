@@ -6,5 +6,9 @@
   {
     "repository": "android_vendor_xiaomi_libra",
     "target_path": "vendor/xiaomi/libra"
+  },
+  {
+    "repository": "android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings"
   }
 ]
