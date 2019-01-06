@@ -22,7 +22,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 27980184576 #26G
 JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
 
 # dt2w
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/wake_gesture"
+TARGET_TAP_TO_WAKE_NODE := "/proc/touchscreen/double_tap_enable"
 
 # Assertions
 TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt

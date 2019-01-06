@@ -86,6 +86,21 @@ on boot
     chown system drmrpc /sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a/secure_touch
     write /proc/sys/kernel/sched_boost 1
 
+    # DT2W
+    chown root system /proc/touchscreen/double_tap_enable
+    chmod 0664 /proc/touchscreen/double_tap_enable
+    restorecon /proc/touchscreen/double_tap_enable
+
+    # Edge gesture
+    chown root system /proc/touchscreen/edge_touch_mode
+    chmod 0664 /proc/touchscreen/edge_touch_mode
+    restorecon /proc/touchscreen/edge_touch_mode
+
+    # Keydisabler
+    chown root system /proc/touchscreen/nav_button_enable
+    chmod 0664 /proc/touchscreen/nav_button_enable
+    restorecon /proc/touchscreen/edge_touch_mode
+
     write /dev/cpuset/foreground/cpus 0-2,4-5
     write /dev/cpuset/foreground/boost/cpus 4-5
     write /dev/cpuset/background/cpus 0

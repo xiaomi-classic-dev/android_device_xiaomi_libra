@@ -28,7 +28,7 @@ public class Constants {
     public static final String EDGE_GESTURE_KEY = "edge_gesture";
 
     // Nodes
-    public static final String EDGE_GESTURE_PATH = "/sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input1/edge_mode";
+    public static final String EDGE_GESTURE_PATH = "/proc/touchscreen/edge_touch_mode";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, SwitchPreferenceBackend> sBackendsMap = new HashMap<>();
