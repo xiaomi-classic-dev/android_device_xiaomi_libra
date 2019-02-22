@@ -272,6 +272,7 @@ vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
 
 # Thermal
+bin/energy-awareness:vendor/bin/energy-awareness
 etc/thermal-engine-8992.conf:vendor/etc/thermal-engine-8992.conf
 
 # Gatekeeper
