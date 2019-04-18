@@ -1,0 +1,27 @@
+service sbinqseecomd /sbin/qseecomd
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on fs
+    wait /dev/block/platform/soc.0/f9824900.sdhci
+    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+
+on post-fs
+    mkdir /firmware 0771 system system
+    wait /dev/block/bootdevice/by-name/modem
+    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower dmask=0555 fmask=0555 gid=1000
+
+on init
+   chmod 0660 /dev/qseecom
+   chown system drmrpc /dev/qseecom
+   chmod 0664 /dev/ion
+   chown system system /dev/ion
+
+on boot
+    write /sys/class/leds/lcd-backlight/brightness 255
+
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
