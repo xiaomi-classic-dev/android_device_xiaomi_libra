@@ -62,6 +62,10 @@ PRODUCT_PACKAGES += \
 # Screen density
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.libra
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
