@@ -96,11 +96,6 @@ on boot
     chmod 0664 /proc/touchscreen/edge_touch_mode
     restorecon /proc/touchscreen/edge_touch_mode
 
-    # Keydisabler
-    chown root system /proc/touchscreen/nav_button_enable
-    chmod 0664 /proc/touchscreen/nav_button_enable
-    restorecon /proc/touchscreen/edge_touch_mode
-
     write /dev/cpuset/foreground/cpus 0-2,4-5
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-2

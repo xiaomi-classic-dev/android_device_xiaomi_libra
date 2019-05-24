@@ -11,6 +11,9 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno418
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_CORTEX_A53 := true
 
+# HIDL
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
+
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_libra
 TARGET_RECOVERY_DEVICE_MODULES := libinit_libra
@@ -21,9 +24,6 @@ TARGET_KERNEL_CONFIG := libra_user_defconfig
 # Partition
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2013265920 #1920M
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 27980184576 #26G
-
-# MK Hardware
-JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
 
 # dt2w
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchscreen/double_tap_enable"
