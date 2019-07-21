@@ -9,7 +9,8 @@ $(call inherit-product, vendor/xiaomi/libra/libra-vendor.mk)
 -include $(DEVICE_PATH)/system_prop.mk
 
 DEVICE_PACKAGE_OVERLAYS += \
-    $(DEVICE_PATH)/overlay
+    $(DEVICE_PATH)/overlay \
+    $(DEVICE_PATH)/overlay-mokee
 
 # Permissions
 PRODUCT_COPY_FILES += \
