@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/mk_libra.mk
+    $(LOCAL_DIR)/mokee_libra.mk
