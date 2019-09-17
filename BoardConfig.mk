@@ -18,8 +18,8 @@ TARGET_KERNEL_CONFIG := libra_user_defconfig
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2013265920 #1920M
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 27980184576 #26G
 
-# MK Hardware
-JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
+# Lineage Hardware
+JAVA_SOURCE_OVERLAYS := org.mokee.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
 
 # dt2w
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchscreen/double_tap_enable"

@@ -16,7 +16,7 @@
 
 package org.mokee.settings.device;
 
-import org.mokee.internal.util.FileUtils;
+import org.lineageos.internal.util.FileUtils;
 
 public class SwitchPreferenceFilesBackend extends SwitchPreferenceBackend {
 

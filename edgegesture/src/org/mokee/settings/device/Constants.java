@@ -17,7 +17,7 @@
 
 package org.mokee.settings.device;
 
-import org.mokee.internal.util.FileUtils;
+import org.lineageos.internal.util.FileUtils;
 
 import java.util.HashMap;
 import java.util.Map;
