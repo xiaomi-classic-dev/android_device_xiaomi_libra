@@ -1,6 +1,7 @@
 cc_binary {
     name: "vendor.mokee.touch@1.0-service.libra",
     defaults: ["hidl_defaults"],
+    vintf_fragments: ["vendor.mokee.touch@1.0-service.libra.xml"],
     relative_install_path: "hw",
     init_rc: ["vendor.mokee.touch@1.0-service.libra.rc"],
     srcs: ["service.cpp", "KeyDisabler.cpp"],
