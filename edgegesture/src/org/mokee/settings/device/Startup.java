@@ -35,7 +35,7 @@ public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
-        if (mokee.content.Intent.ACTION_INITIALIZE_MK_HARDWARE.equals(action)) {
+        if (mokee.content.Intent.ACTION_INITIALIZE_MOKEE_HARDWARE.equals(action)) {
             enableComponent(context, ButtonSettingsActivity.class.getName());
 
             // Restore saved preference values
