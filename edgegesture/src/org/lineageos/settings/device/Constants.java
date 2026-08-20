@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *           (C) 2017 The LineageOS Project
+ *           (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,24 @@
  * limitations under the License.
  */
 
-package org.mokee.settings.device;
+package org.lineageos.settings.device;
 
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ButtonSettingsActivity extends PreferenceActivity {
+public class Constants {
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    // Preference keys
+    public static final String EDGE_GESTURE_KEY = "edge_gesture";
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new ButtonSettingsFragment()).commit();
+    // Nodes
+    public static final String EDGE_GESTURE_PATH = "/proc/touchscreen/edge_touch_mode";
+
+    // Holds <preference_key> -> <proc_node> mapping
+    public static final Map<String, SwitchPreferenceBackend> sBackendsMap = new HashMap<>();
+
+    static {
+        sBackendsMap.put(EDGE_GESTURE_KEY,
+                new SwitchPreferenceFilesBackend(EDGE_GESTURE_PATH));
     }
 }

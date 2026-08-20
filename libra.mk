@@ -10,7 +10,7 @@ $(call inherit-product, vendor/xiaomi/libra/libra-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay \
-    $(DEVICE_PATH)/overlay-mokee
+    $(DEVICE_PATH)/overlay-lineage
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -65,7 +65,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Touch
 PRODUCT_PACKAGES += \
-    vendor.mokee.touch@1.0-service.libra
+    vendor.lineage.touch@1.0-service.libra
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920

@@ -1,4 +1,4 @@
-Copyright 2018 - The Mokee Project
+Copyright 2018 - The LineageOS Project
 
 Device configuration for Xiaomi Mi-4c.
 =====================================

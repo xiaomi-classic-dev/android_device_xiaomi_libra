@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2016 The CyanogenMod Project
+ *           (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +15,17 @@
  * limitations under the License.
  */
 
-package org.mokee.settings.device;
+package org.lineageos.settings.device;
 
-public abstract class SwitchPreferenceBackend {
-    protected Boolean mValue = true;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
 
-    public SwitchPreferenceBackend() {
+public class ButtonSettingsActivity extends PreferenceActivity {
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
+                new ButtonSettingsFragment()).commit();
     }
-
-    public Boolean getValue() {
-        return mValue;
-    }
-
-    public abstract void setValue(Boolean value);
-
-    public abstract Boolean isValid();
 }

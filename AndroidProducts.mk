@@ -14,4 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/mokee_libra.mk
+    $(LOCAL_DIR)/lineage_libra.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_libra-user \
+    lineage_libra-userdebug \
+    lineage_libra-eng
