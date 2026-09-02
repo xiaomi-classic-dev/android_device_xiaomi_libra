@@ -1,0 +1,9 @@
+#!/sbin/sh
+
+OUTFD="/proc/$$/fd/$2"
+
+ui_print() {
+  echo "ui_print $*" >"$OUTFD"
+  echo "ui_print" >"$OUTFD"
+}
+

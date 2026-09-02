@@ -1,0 +1,97 @@
+#!/sbin/sh
+
+OUTFD="/proc/$$/fd/$2"
+DISK=/dev/block/mmcblk0
+SYSFS=/sys/block/mmcblk0
+
+ui_print() {
+  echo "ui_print $*" >"$OUTFD"
+  echo "ui_print" >"$OUTFD"
+}
+
+fail() {
+  ui_print "ERROR: $*"
+  exit 1
+}
+
+read_sysfs() {
+  cat "$1" 2>/dev/null || echo missing
+}
+
+check_value() {
+  [ "$2" = "$3" ] || fail "$1 expected $3, got $2"
+}
+
+is_mounted() {
+  grep -q " $1 " /proc/mounts 2>/dev/null
+}
+
+device="$(getprop ro.product.device)"
+build_product="$(getprop ro.build.product)"
+ui_print
+ui_print "Xiaomi Mi 4c repartition finishing package"
+ui_print "Device: $device / $build_product"
+
+if [ "$device" != "libra" ] && [ "$build_product" != "libra" ]; then
+  fail "This package is only for libra"
+fi
+
+[ -b "$DISK" ] || fail "$DISK is not a block device"
+command -v make_ext4fs >/dev/null 2>&1 || fail "Recovery has no make_ext4fs"
+command -v blkid >/dev/null 2>&1 || fail "Recovery has no blkid"
+
+disk_size="$(read_sysfs "$SYSFS/size")"
+case "$disk_size" in
+  ''|*[!0-9]*) fail "Invalid mmcblk0 sector count: $disk_size" ;;
+esac
+last_usable=$((disk_size - 34))
+expected_userdata_size=$((last_usable - 8519680 + 1))
+
+check_value "system start" "$(read_sysfs "$SYSFS/mmcblk0p41/start")" "1048576"
+check_value "system size" "$(read_sysfs "$SYSFS/mmcblk0p41/size")" "6029312"
+check_value "cache start" "$(read_sysfs "$SYSFS/mmcblk0p42/start")" "7077888"
+check_value "cache size" "$(read_sysfs "$SYSFS/mmcblk0p42/size")" "786432"
+check_value "cust start" "$(read_sysfs "$SYSFS/mmcblk0p43/start")" "7864320"
+check_value "cust size" "$(read_sysfs "$SYSFS/mmcblk0p43/size")" "655360"
+check_value "userdata start" "$(read_sysfs "$SYSFS/mmcblk0p44/start")" "8519680"
+check_value "userdata size" "$(read_sysfs "$SYSFS/mmcblk0p44/size")" "$expected_userdata_size"
+
+all_ext4=1
+for part in 41 42 43 44; do
+  blkid "/dev/block/mmcblk0p$part" 2>/dev/null | grep -q 'TYPE="ext4"' || all_ext4=0
+done
+[ "$all_ext4" != "1" ] || fail "Target layout is already formatted; refusing to wipe it again"
+
+ui_print "Target GPT is visible; formatting p41-p44"
+umount /sdcard 2>/dev/null
+umount /data/media 2>/dev/null
+umount /system_root/system 2>/dev/null
+umount /system 2>/dev/null
+umount /system_root 2>/dev/null
+umount /cache 2>/dev/null
+umount /cust 2>/dev/null
+umount /data 2>/dev/null
+
+is_mounted /system && fail "/system is still mounted"
+is_mounted /system_root && fail "/system_root is still mounted"
+is_mounted /cache && fail "/cache is still mounted"
+is_mounted /cust && fail "/cust is still mounted"
+is_mounted /data && fail "/data is still mounted"
+
+make_ext4fs -L system -a system /dev/block/mmcblk0p41 || fail "format system failed"
+make_ext4fs -L cache -a cache /dev/block/mmcblk0p42 || fail "format cache failed"
+make_ext4fs -L cust -a cust /dev/block/mmcblk0p43 || fail "format cust failed"
+make_ext4fs -L data -a data /dev/block/mmcblk0p44 || fail "format userdata failed"
+sync
+
+for part in 41 42 43 44; do
+  blkid "/dev/block/mmcblk0p$part" 2>/dev/null | grep -q 'TYPE="ext4"' ||
+    fail "ext4 verification failed for p$part"
+done
+
+ui_print
+ui_print "Formatting complete; rebooting recovery"
+sleep 3
+reboot recovery
+exit 0
+

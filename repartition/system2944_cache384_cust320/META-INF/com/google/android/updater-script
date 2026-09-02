@@ -1,0 +1,211 @@
+#!/sbin/sh
+
+DISK=/dev/block/mmcblk0
+SYSFS=/sys/block/mmcblk0
+SHIFT_SECTORS=2097152
+OLD_SYSTEM_SECTORS=3932160
+NEW_SYSTEM_SECTORS=6029312
+CACHE_SECTORS=786432
+CUST_SECTORS=655360
+
+ui_print
+ui_print "Xiaomi Mi 4c (libra) repartition"
+ui_print "system: 1920 MiB -> 2944 MiB"
+ui_print "cache: 384 MiB; cust: 320 MiB"
+ui_print "WARNING: userdata and internal storage will be wiped"
+ui_print
+
+fail() {
+  ui_print "ERROR: $*"
+  exit 1
+}
+
+read_sysfs() {
+  cat "$1" 2>/dev/null || echo missing
+}
+
+require_uint() {
+  case "$2" in
+    ''|*[!0-9]*) fail "$1 is invalid: $2" ;;
+  esac
+}
+
+check_value() {
+  [ "$2" = "$3" ] || fail "$1 expected $3, got $2"
+}
+
+is_mounted() {
+  grep -q " $1 " /proc/mounts 2>/dev/null
+}
+
+device="$(getprop ro.product.device)"
+build_product="$(getprop ro.build.product)"
+model="$(getprop ro.product.model)"
+
+ui_print "Device: $device / $build_product / $model"
+if [ "$device" != "libra" ] && [ "$build_product" != "libra" ]; then
+  fail "This package is only for libra"
+fi
+
+[ -b "$DISK" ] || fail "$DISK is not a block device"
+
+disk_size="$(read_sysfs "$SYSFS/size")"
+require_uint "mmcblk0 sector count" "$disk_size"
+[ "$disk_size" -gt "$SHIFT_SECTORS" ] || fail "mmcblk0 is smaller than expected"
+last_usable=$((disk_size - 34))
+
+p41_start="$(read_sysfs "$SYSFS/mmcblk0p41/start")"
+p41_size="$(read_sysfs "$SYSFS/mmcblk0p41/size")"
+p42_start="$(read_sysfs "$SYSFS/mmcblk0p42/start")"
+p42_size="$(read_sysfs "$SYSFS/mmcblk0p42/size")"
+p43_start="$(read_sysfs "$SYSFS/mmcblk0p43/start")"
+p43_size="$(read_sysfs "$SYSFS/mmcblk0p43/size")"
+p44_start="$(read_sysfs "$SYSFS/mmcblk0p44/start")"
+p44_size="$(read_sysfs "$SYSFS/mmcblk0p44/size")"
+
+require_uint "p41 start" "$p41_start"
+require_uint "p41 size" "$p41_size"
+require_uint "p42 start" "$p42_start"
+require_uint "p42 size" "$p42_size"
+require_uint "p43 start" "$p43_start"
+require_uint "p43 size" "$p43_size"
+require_uint "p44 start" "$p44_start"
+require_uint "p44 size" "$p44_size"
+
+p41_end=$((p41_start + p41_size - 1))
+p42_end=$((p42_start + p42_size - 1))
+p43_end=$((p43_start + p43_size - 1))
+p44_end=$((p44_start + p44_size - 1))
+
+if [ "$p41_size" = "$NEW_SYSTEM_SECTORS" ] &&
+   [ "$p42_size" = "$CACHE_SECTORS" ] &&
+   [ "$p43_size" = "$CUST_SECTORS" ] &&
+   [ "$p42_start" = "$((p41_end + 1))" ] &&
+   [ "$p43_start" = "$((p42_end + 1))" ] &&
+   [ "$p44_start" = "$((p43_end + 1))" ] &&
+   [ "$p44_end" = "$last_usable" ]; then
+  fail "Target layout is already present; refusing to wipe it again"
+fi
+
+check_value "system size" "$p41_size" "$OLD_SYSTEM_SECTORS"
+check_value "cache size" "$p42_size" "$CACHE_SECTORS"
+check_value "cust size" "$p43_size" "$CUST_SECTORS"
+check_value "cache start" "$p42_start" "$((p41_end + 1))"
+check_value "cust start" "$p43_start" "$((p42_end + 1))"
+check_value "userdata start" "$p44_start" "$((p43_end + 1))"
+check_value "userdata end" "$p44_end" "$last_usable"
+
+new_p41_start=$p41_start
+new_p41_end=$((new_p41_start + NEW_SYSTEM_SECTORS - 1))
+new_p42_start=$((new_p41_end + 1))
+new_p42_end=$((new_p42_start + CACHE_SECTORS - 1))
+new_p43_start=$((new_p42_end + 1))
+new_p43_end=$((new_p43_start + CUST_SECTORS - 1))
+new_p44_start=$((new_p43_end + 1))
+new_p44_end=$last_usable
+new_p44_size=$((new_p44_end - new_p44_start + 1))
+
+check_value "calculated cache shift" "$((new_p42_start - p42_start))" "$SHIFT_SECTORS"
+check_value "calculated cust shift" "$((new_p43_start - p43_start))" "$SHIFT_SECTORS"
+check_value "calculated userdata shift" "$((new_p44_start - p44_start))" "$SHIFT_SECTORS"
+[ "$new_p44_size" -gt "0" ] || fail "Calculated userdata size is invalid"
+
+payload_line="$(awk '/^__LIBRA_PARTED_BASE64__$/ { print NR + 1; exit }' "$0")"
+require_uint "embedded parted payload line" "$payload_line"
+tail -n "+$payload_line" "$0" | base64 -d > /tmp/parted ||
+  fail "Cannot decode embedded parted"
+parted_sha256="$(sha256sum /tmp/parted 2>/dev/null | awk '{print $1}')"
+check_value "embedded parted SHA-256" "$parted_sha256" \
+  "e7c06fd959c3c259f5bce9829406207bf6990b486a79b7f2ee935314099cc126"
+chmod 0755 /tmp/parted
+/tmp/parted --version >/tmp/libra-parted-version 2>&1 || fail "Bundled parted cannot run"
+
+if ! command -v make_ext4fs >/dev/null 2>&1; then
+  fail "Recovery does not provide make_ext4fs; GPT was not changed"
+fi
+
+ui_print "Validated current layout"
+ui_print "New system sectors: $new_p41_start-$new_p41_end"
+ui_print "New cache sectors: $new_p42_start-$new_p42_end"
+ui_print "New cust sectors: $new_p43_start-$new_p43_end"
+ui_print "New userdata sectors: $new_p44_start-$new_p44_end"
+
+if [ "$LIBRA_REPARTITION_DRY_RUN" = "1" ]; then
+  ui_print "Dry-run validation complete; GPT was not changed"
+  exit 0
+fi
+
+ui_print "Unmounting filesystems"
+umount /sdcard 2>/dev/null
+umount /data/media 2>/dev/null
+umount /system_root/system 2>/dev/null
+umount /system 2>/dev/null
+umount /system_root 2>/dev/null
+umount /cache 2>/dev/null
+umount /cust 2>/dev/null
+umount /data 2>/dev/null
+
+is_mounted /system && fail "/system is still mounted"
+is_mounted /system_root && fail "/system_root is still mounted"
+is_mounted /cache && fail "/cache is still mounted"
+is_mounted /cust && fail "/cust is still mounted"
+is_mounted /data && fail "/data is still mounted"
+
+ui_print "Writing GPT"
+/tmp/parted "$DISK" <<EOF
+unit s
+rm 44
+rm 43
+rm 42
+rm 41
+mkpart primary ${new_p41_start}s ${new_p41_end}s
+name 41 system
+mkpart primary ${new_p42_start}s ${new_p42_end}s
+name 42 cache
+mkpart primary ${new_p43_start}s ${new_p43_end}s
+name 43 cust
+mkpart primary ${new_p44_start}s ${new_p44_end}s
+name 44 userdata
+quit
+EOF
+[ "$?" = "0" ] || fail "parted failed; partition table may need recovery"
+
+/tmp/parted -m "$DISK" unit s print >/tmp/libra-gpt-after.txt 2>/dev/null ||
+  fail "Cannot read GPT after writing it"
+grep -q "^41:${new_p41_start}s:${new_p41_end}s:${NEW_SYSTEM_SECTORS}s:[^:]*:system:" \
+  /tmp/libra-gpt-after.txt || fail "Raw GPT verification failed for system"
+grep -q "^42:${new_p42_start}s:${new_p42_end}s:${CACHE_SECTORS}s:[^:]*:cache:" \
+  /tmp/libra-gpt-after.txt || fail "Raw GPT verification failed for cache"
+grep -q "^43:${new_p43_start}s:${new_p43_end}s:${CUST_SECTORS}s:[^:]*:cust:" \
+  /tmp/libra-gpt-after.txt || fail "Raw GPT verification failed for cust"
+grep -q "^44:${new_p44_start}s:${new_p44_end}s:${new_p44_size}s:[^:]*:userdata:" \
+  /tmp/libra-gpt-after.txt || fail "Raw GPT verification failed for userdata"
+
+sync
+blockdev --flushbufs "$DISK" 2>/dev/null
+blockdev --rereadpt "$DISK" 2>/dev/null
+sleep 3
+
+ui_print "Verifying new partition table"
+check_value "new system start" "$(read_sysfs "$SYSFS/mmcblk0p41/start")" "$new_p41_start"
+check_value "new system size" "$(read_sysfs "$SYSFS/mmcblk0p41/size")" "$NEW_SYSTEM_SECTORS"
+check_value "new cache start" "$(read_sysfs "$SYSFS/mmcblk0p42/start")" "$new_p42_start"
+check_value "new cache size" "$(read_sysfs "$SYSFS/mmcblk0p42/size")" "$CACHE_SECTORS"
+check_value "new cust start" "$(read_sysfs "$SYSFS/mmcblk0p43/start")" "$new_p43_start"
+check_value "new cust size" "$(read_sysfs "$SYSFS/mmcblk0p43/size")" "$CUST_SECTORS"
+check_value "new userdata start" "$(read_sysfs "$SYSFS/mmcblk0p44/start")" "$new_p44_start"
+check_value "new userdata size" "$(read_sysfs "$SYSFS/mmcblk0p44/size")" "$new_p44_size"
+
+ui_print "Formatting system/cache/cust/userdata as ext4"
+make_ext4fs -L system -a system /dev/block/mmcblk0p41 || fail "format system failed"
+make_ext4fs -L cache -a cache /dev/block/mmcblk0p42 || fail "format cache failed"
+make_ext4fs -L cust -a cust /dev/block/mmcblk0p43 || fail "format cust failed"
+make_ext4fs -L data -a data /dev/block/mmcblk0p44 || fail "format userdata failed"
+sync
+
+ui_print
+ui_print "Repartition complete"
+ui_print "Rebooting recovery"
+sleep 3
+reboot recovery
+exit 0

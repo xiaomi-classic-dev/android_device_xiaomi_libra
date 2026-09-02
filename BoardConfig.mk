@@ -1,11 +1,11 @@
--include device/xiaomi/msm8994-common/BoardConfigCommon.mk
-
-DEVICE_PATH := device/xiaomi/libra
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8992
 TARGET_BOOTLOADER_BOARD_NAME := msm8992
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno418
+
+-include device/xiaomi/msm8994-common/BoardConfigCommon.mk
+
+DEVICE_PATH := device/xiaomi/libra
 
 # Arch
 TARGET_CPU_VARIANT := generic
@@ -25,7 +25,7 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_libra
 TARGET_KERNEL_CONFIG := libra_user_defconfig
 
 # Partition
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2013265920 #1920M
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3087007744 #2944M
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 27980184576 #26G
 
 # dt2w
@@ -37,9 +37,6 @@ TARGET_OTA_ASSERT_DEVICE := 4C,libra
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2018-03-01
-
-# Shims
-TARGET_LD_SHIM_LIBS += /system/vendor/lib/hw/camera.vendor.msm8992.so|libshim_camera.so
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/libra/BoardConfigVendor.mk
