@@ -1,6 +1,12 @@
 DEVICE_PATH := device/xiaomi/libra
 BOARD_PLATFORM := msm8992
 
+# Radio profile
+# The common tree also serves CDMA-capable variants. Libra uses a 3GPP-only
+# GSM/WCDMA/LTE profile; TD-SCDMA is not used by China Unicom.
+MSM8994_RIL_SUBSCRIPTION_TYPES := NV,RUIM
+MSM8994_DEFAULT_NETWORK := 9,9
+
 # Get non-open-source specific aspects
 $(call inherit-product, device/xiaomi/msm8994-common/msm8994-common.mk)
 $(call inherit-product, vendor/xiaomi/libra/libra-vendor.mk)
