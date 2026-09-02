@@ -140,8 +140,8 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-on property:init.svc.per_mgr=running
-    start per_proxy
+# pm-proxy was built against the pre-Android 12 Parcel layout. Starting it
+# with Android 12's libbinder corrupts its stack, so leave the service disabled.
 
 on property:sys.shutdown.requested=*
     stop per_proxy
@@ -185,4 +185,3 @@ service fidodaemon /system/vendor/bin/fidodaemon
     class late_start
     user system
     group system
-
