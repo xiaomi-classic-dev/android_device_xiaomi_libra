@@ -46,6 +46,14 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/wlan_bt 0700 system system
 
+on late-fs
+    # Start legacy graphics HALs before SurfaceFlinger and the boot animation.
+    start vendor.configstore-hal
+    start vendor.gralloc-2-0
+    start vendor.hwcomposer-2-1
+    start surfaceflinger
+    start bootanim
+
 on post-fs
     # We chown/chmod /cust again so because mount is run as root + defaults
     chown system system /cust
@@ -120,6 +128,9 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
+
+on property:init.svc.qcamerasvr=running
+    restart cameraserver
 
 service qseecomd /vendor/bin/qseecomd
     class core
