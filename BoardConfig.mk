@@ -1,9 +1,10 @@
+TARGET_BOARD_PLATFORM := msm8992
+
 -include device/xiaomi/msm8994-common/BoardConfigCommon.mk
 
 DEVICE_PATH := device/xiaomi/libra
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8992
 TARGET_BOOTLOADER_BOARD_NAME := msm8992
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno418
 
