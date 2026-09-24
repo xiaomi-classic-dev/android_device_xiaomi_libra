@@ -5,6 +5,11 @@ BOARD_PLATFORM := msm8992
 $(call inherit-product, device/xiaomi/msm8994-common/msm8994-common.mk)
 $(call inherit-product, vendor/xiaomi/libra/libra-vendor.mk)
 
+# Keep Kenzo's RIL compatible with Libra's older Voice QMI service.
+PRODUCT_PACKAGES += libqmi_voice_compat
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/zz-libra-rild.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/zz-libra-rild.rc
+
 # System properties
 -include $(DEVICE_PATH)/system_prop.mk
 
