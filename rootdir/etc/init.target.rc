@@ -45,6 +45,10 @@ on fs
 
     mount_all /vendor/etc/fstab.qcom
 
+    # Load modem segments directly from the mounted firmware partition.
+    # Avoid the legacy sysfs/uevent handoff occasionally losing modem.b14.
+    write /sys/module/firmware_class/parameters/path /firmware/image
+
     mkdir /persist/data 0700 system system
     mkdir /persist/wlan_bt 0700 system system
 
@@ -153,8 +157,10 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-# pm-proxy was built against the pre-Android 12 Parcel layout. Starting it
-# with Android 12's libbinder corrupts its stack, so leave the service disabled.
+# The current peripheral-manager blobs use the vendor Binder driver and
+# pm-proxy must vote for the modem before QCRIL can use it.
+on property:init.svc.per_mgr=running
+    start per_proxy
 
 on property:sys.shutdown.requested=*
     stop per_proxy

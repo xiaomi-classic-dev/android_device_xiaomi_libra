@@ -1,7 +1,16 @@
-service ril-daemon /vendor/bin/hw/rild
+service vendor.ril-daemon /vendor/bin/hw/rild
     class main
     user radio
-    group radio cache inet misc audio log readproc wakelock
+    group radio cache inet misc audio log readproc wakelock net_raw
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    setenv LD_PRELOAD /vendor/lib64/libqmi_voice_compat.so
+    override
+
+service ril-daemon2 /vendor/bin/hw/rild -c 2
+    class main
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw diag log net_raw
     setenv LD_PRELOAD /vendor/lib64/libqmi_voice_compat.so
     override
