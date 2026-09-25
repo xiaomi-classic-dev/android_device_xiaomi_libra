@@ -14,6 +14,10 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 LOCAL_STATIC_JAVA_LIBRARIES := \
     org.lineageos.platform.internal
 
+LOCAL_OPTIONAL_USES_LIBRARIES := \
+    androidx.window.extensions \
+    androidx.window.sidecar
+
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
