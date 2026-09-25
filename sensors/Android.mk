@@ -36,6 +36,8 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libutils \
 
+LOCAL_HEADER_LIBRARIES := libhardware_headers
+
 LOCAL_STRIP_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
