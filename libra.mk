@@ -1,6 +1,10 @@
 DEVICE_PATH := device/xiaomi/libra
 BOARD_PLATFORM := msm8992
 
+# Android 14 netd requires the cgroup v2 hierarchy at /sys/fs/cgroup.
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json
+
 # Radio profile
 # The common tree also serves CDMA-capable variants. Libra uses a 3GPP-only
 # GSM/WCDMA/LTE profile; TD-SCDMA is not used by China Unicom.

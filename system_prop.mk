@@ -1,7 +1,8 @@
 # Display feature support
 # bit0-ColorPrefer bit1-EyeCare bit2-AD bit3-CE bit4-CABC bit5-SRGB
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.display.support=23
+    ro.sys.display.support=23 \
+    ro.hardware.egl=adreno
 
 #Enable 16 bit PCM offload by default
 PRODUCT_PROPERTY_OVERRIDES += \
