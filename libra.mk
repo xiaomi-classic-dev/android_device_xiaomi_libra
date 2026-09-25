@@ -16,6 +16,10 @@ PRODUCT_PACKAGES += libqmi_voice_compat
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/rootdir/zz-libra-rild.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/zz-libra-rild.rc
 
+# Run the older GNSS blob against the isolated msm8994 QMI client ABI.
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/zz-libra-location.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/zz-libra-location.rc
+
 # System properties
 -include $(DEVICE_PATH)/system_prop.mk
 
