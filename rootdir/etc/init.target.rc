@@ -36,6 +36,8 @@ on early-init
 
 on init
     mkdir /cust 0771 system system
+    # Rome reports a truncated opcode for APCF extended-features commands.
+    setprop bluetooth.le.disable_apcf_extended_features 1
 
 on fs
     wait /dev/block/platform/soc.0/f9824900.sdhci/mmcblk0
