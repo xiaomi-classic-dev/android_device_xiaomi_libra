@@ -1,0 +1,15 @@
+cc_library_shared {
+    name: "libppd_poll_compat",
+    srcs: ["ppd_poll_compat.c"],
+    shared_libs: ["libdl"],
+    vendor: true,
+    compile_multilib: "64",
+}
+
+cc_library_shared {
+    name: "libpm_stack_compat",
+    srcs: ["pm_stack_compat.c"],
+    shared_libs: ["libdl"],
+    vendor: true,
+    compile_multilib: "64",
+}
