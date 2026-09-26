@@ -17,6 +17,6 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_libra.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_libra-user \
-    lineage_libra-userdebug \
-    lineage_libra-eng
+    lineage_libra-ap4a-user \
+    lineage_libra-ap4a-userdebug \
+    lineage_libra-ap4a-eng
