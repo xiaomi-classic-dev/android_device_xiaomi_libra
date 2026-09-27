@@ -53,6 +53,8 @@ on fs
     mkdir /persist/wlan_bt 0700 system system
 
 on late-fs
+    # SurfaceFlinger waits for Power AIDL before the hal class starts.
+    start vendor.power
     # Start legacy graphics HALs before SurfaceFlinger and the boot animation.
     start vendor.configstore-hal
     start vendor.gralloc-2-0
@@ -139,7 +141,7 @@ on property:init.svc.qcamerasvr=running
     restart cameraserver
 
 service qseecomd /vendor/bin/qseecomd
-    class core
+    class early_hal
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
