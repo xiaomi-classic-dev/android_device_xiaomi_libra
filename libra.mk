@@ -1,6 +1,10 @@
 DEVICE_PATH := device/xiaomi/libra
 BOARD_PLATFORM := msm8992
 
+# Covers both the 2 GiB and 3 GiB Libra variants. Without a heap profile,
+# AndroidRuntime defaults to a 16 MiB maximum and system_server cannot boot.
+$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+
 # Android 14 netd requires the cgroup v2 hierarchy at /sys/fs/cgroup.
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json
