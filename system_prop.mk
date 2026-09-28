@@ -25,3 +25,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # eBPF support
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.ebpf.supported=true
+
+# NetBpfLoad supports a version override for kernels with BPF backports.
+# Android 16 requires 5.4; keep the reported BPF version below 5.10.
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.bpf.kver_override=5.4.186
