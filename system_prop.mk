@@ -27,6 +27,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.ebpf.supported=true
 
 # NetBpfLoad supports a version override for kernels with BPF backports.
-# Android 16 requires 5.4; keep the reported BPF version below 5.10.
+# Android 17's Tethering APEX rejects <5.10 and expects 5.10.199 on that branch.
 PRODUCT_SYSTEM_PROPERTIES += \
-    ro.bpf.kver_override=5.4.186
+    ro.bpf.kver_override=5.10.199
+
+# The kernel LMK already handles memory pressure. Android also requests PSI
+# monitoring after boot; zero thresholds skip the unsupported PSI triggers.
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.lmk.use_new_strategy=true \
+    ro.lmk.psi_partial_stall_ms=0 \
+    ro.lmk.psi_complete_stall_ms=0

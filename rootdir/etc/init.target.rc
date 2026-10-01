@@ -45,6 +45,13 @@ on fs
 
     mount_all /vendor/etc/fstab.qcom
 
+    # Libra has no metadata partition; userdata is already mounted unencrypted.
+    # Provide persistent flag storage before aconfigd runs in post-fs.
+    mkdir /metadata 0771 root system
+    mkdir /data/metadata 0771 root system
+    mount none /data/metadata /metadata bind
+    restorecon_recursive /metadata
+
     # Load modem segments directly from the mounted firmware partition.
     # Avoid the legacy sysfs/uevent handoff occasionally losing modem.b14.
     write /sys/module/firmware_class/parameters/path /firmware/image
@@ -138,6 +145,12 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.qcamerasvr=running
+    restart cameraserver
+
+# The provider can cache a partial sensor list while the vendor daemon probes.
+# Refresh it after boot, when both sensor media devices have been registered.
+on property:sys.boot_completed=1
+    restart vendor.camera-provider-2-4
     restart cameraserver
 
 service qseecomd /vendor/bin/qseecomd

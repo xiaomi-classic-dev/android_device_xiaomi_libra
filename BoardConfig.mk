@@ -16,10 +16,15 @@ TARGET_SCREEN_DENSITY := 480
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += $(DEVICE_PATH)/thermal/framework_matrix.xml
+
+# Device-specific thermal HAL sensor access.
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_libra
 TARGET_RECOVERY_DEVICE_MODULES := libinit_libra
+BOARD_ROOT_EXTRA_FOLDERS += metadata
 
 # Kernel
 TARGET_KERNEL_CONFIG := libra_user_defconfig

@@ -1,0 +1,5 @@
+service vendor.thermal-libra /vendor/bin/hw/android.hardware.thermal-service.libra
+    class hal
+    user system
+    group system
+    interface aidl android.hardware.thermal.IThermal/default

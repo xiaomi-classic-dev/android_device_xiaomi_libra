@@ -1,0 +1,5 @@
+service ir-hal-aidl /vendor/bin/hw/android.hardware.ir-service.libra
+    interface aidl android.hardware.ir.IConsumerIr/default
+    class hal
+    user system
+    group system

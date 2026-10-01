@@ -79,11 +79,14 @@ PRODUCT_PACKAGES += \
 
 # IR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.libra
+    android.hardware.ir-service.libra
 
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8992
+
+# Expose the original thermal-engine policy and real sensors to Android.
+PRODUCT_PACKAGES += android.hardware.thermal-service.libra
 
 # Screen density
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi

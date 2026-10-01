@@ -17,24 +17,23 @@
 #define LOG_TAG "ConsumerIrService"
 
 #include <fcntl.h>
+#include <cerrno>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include <linux/lirc.h>
 
 #include <android-base/logging.h>
 
 #include "ConsumerIr.h"
 
-namespace android {
-namespace hardware {
-namespace ir {
-namespace V1_0 {
-namespace implementation {
+namespace aidl::android::hardware::ir::implementation {
 
 #define LIRC_DEV_PATH "/dev/lirc0"
 
 static const int dutyCycle = 33;
 
-static hidl_vec<ConsumerIrFreqRange> rangeVec{
-    {.min = 30000, .max = 60000},
+static const std::vector<ConsumerIrFreqRange> rangeVec{
+    {.minHz = 30000, .maxHz = 60000},
 };
 
 static int openLircDev() {
@@ -47,15 +46,17 @@ static int openLircDev() {
     return fd;
 }
 
-// Methods from ::android::hardware::ir::V1_0::IConsumerIr follow.
-Return<bool> ConsumerIr::transmit(int32_t carrierFreq, const hidl_vec<int32_t>& pattern) {
+ndk::ScopedAStatus ConsumerIr::transmit(int32_t carrierFreq, const std::vector<int32_t>& pattern) {
+    if (pattern.empty()) return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
+    if (carrierFreq < 30000 || carrierFreq > 60000)
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     size_t entries = pattern.size();
     int rc;
     int lircFd;
 
     lircFd = openLircDev();
     if (lircFd < 0) {
-        return lircFd;
+        return ndk::ScopedAStatus::fromServiceSpecificError(errno);
     }
 
     rc = ioctl(lircFd, LIRC_SET_SEND_CARRIER, &carrierFreq);
@@ -87,16 +88,13 @@ Return<bool> ConsumerIr::transmit(int32_t carrierFreq, const hidl_vec<int32_t>& 
 out_close:
     close(lircFd);
 
-    return rc == 0;
+    return rc == 0 ? ndk::ScopedAStatus::ok()
+                   : ndk::ScopedAStatus::fromServiceSpecificError(EIO);
 }
 
-Return<void> ConsumerIr::getCarrierFreqs(getCarrierFreqs_cb _hidl_cb) {
-    _hidl_cb(true, rangeVec);
-    return Void();
+ndk::ScopedAStatus ConsumerIr::getCarrierFreqs(std::vector<ConsumerIrFreqRange>* ranges) {
+    *ranges = rangeVec;
+    return ndk::ScopedAStatus::ok();
 }
 
-}  // namespace implementation
-}  // namespace V1_0
-}  // namespace ir
-}  // namespace hardware
-}  // namespace android
+}  // namespace aidl::android::hardware::ir::implementation

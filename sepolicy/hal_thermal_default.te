@@ -1,0 +1,7 @@
+allow hal_thermal_default sysfs:dir r_dir_perms;
+allow hal_thermal_default sysfs:lnk_file read;
+allow hal_thermal_default sysfs_type:dir search;
+allow hal_thermal_default sysfs_thermal:file r_file_perms;
+allow hal_thermal_default sysfs_battery_supply:file r_file_perms;
+allow hal_thermal_default sysfs_kgsl:file r_file_perms;
+allow hal_thermal_default sysfs_mpdecision:file r_file_perms;
